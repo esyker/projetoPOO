@@ -41,6 +41,6 @@ public interface DirectedTree<V> {
 	 * 
 	 * @param s
 	 */
-	void loadFromSpanningTree(SpanningTree s);
+	void loadFromSpanningTree(SpanningTree<V> s);
 
 }

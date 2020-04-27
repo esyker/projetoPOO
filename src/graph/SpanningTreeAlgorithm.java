@@ -1,7 +1,7 @@
 package graph;
 
-public interface SpanningTreeAlgorithm {
+public interface SpanningTreeAlgorithm<V> {
 
-	SpanningTree getSpanningTree();
+	SpanningTree<V> getSpanningTree();
 
 }

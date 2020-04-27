@@ -1,6 +1,8 @@
 package graph;
 
-public abstract class AbstractUndirectedWeightedGraph<V> implements Graph {
+import java.util.List;
+
+public abstract class AbstractUndirectedWeightedGraph<V> implements Graph<V> {
 
 	protected float[][] weight_matrix;
 	protected List<V> vertices;

@@ -4,8 +4,8 @@ import java.util.*;
 
 public class TreeNode<V> {
 
-	TreeNode parent;
-	Collection<TreeNode> children;
+	TreeNode<V> parent;
+	Collection<TreeNode<V>> children;
 	protected V vertex;
 
 	public TreeNode() {
@@ -17,7 +17,7 @@ public class TreeNode<V> {
 	 * 
 	 * @param v
 	 */
-	public void setVertice(Vertice v) {
+	public void setVertice(V v) {
 		// TODO - implement TreeNode.setVertice
 		throw new UnsupportedOperationException();
 	}
@@ -26,7 +26,7 @@ public class TreeNode<V> {
 	 * 
 	 * @param v
 	 */
-	public void addChild(Vertice v) {
+	public void addChild(V v) {
 		// TODO - implement TreeNode.addChild
 		throw new UnsupportedOperationException();
 	}
