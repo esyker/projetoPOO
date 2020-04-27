@@ -1,5 +1,7 @@
 package classifier;
 
+import dataset.Attribute;
+
 public class MDLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifier {
 
 	public MDLBayesianNetworkClassifier() {

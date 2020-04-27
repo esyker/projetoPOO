@@ -1,5 +1,7 @@
 package classifier;
 
+import dataset.Attribute;
+
 public class LLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifier {
 
 	public LLBayesianNetworkClassifier() {
@@ -16,5 +18,7 @@ public class LLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifi
 		// TODO - implement LLBayesianNetworkClassifier.computeWeight
 		throw new UnsupportedOperationException();
 	}
+
+	
 
 }

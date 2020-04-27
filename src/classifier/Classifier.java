@@ -1,5 +1,8 @@
 package classifier;
 
+import dataset.Dataset;
+import dataset.Instance;
+
 public interface Classifier {
 
 	/**

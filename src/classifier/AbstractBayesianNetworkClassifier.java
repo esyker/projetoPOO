@@ -61,5 +61,17 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		// TODO - implement AbstractBayesianNetworkClassifier.computeNijkc
 		throw new UnsupportedOperationException();
 	}
+	
+	@Override
+	public void buildClassifier(Dataset data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int classify(Instance i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }
