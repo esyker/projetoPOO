@@ -8,7 +8,7 @@ public interface Instance {
 	 */
 	void setClass(int c);
 
-	int getClass();
+	int getclass();
 
 	/**
 	 * 

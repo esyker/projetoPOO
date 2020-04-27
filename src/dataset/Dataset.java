@@ -26,6 +26,6 @@ public interface Dataset {
 	 * 
 	 * @param a
 	 */
-	int getMaxAttributeValue(attribute a);
+	int getMaxAttributeValue(Attribute a);
 
 }
