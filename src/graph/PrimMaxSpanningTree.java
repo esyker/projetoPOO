@@ -11,4 +11,10 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public SpanningTree getSpanningTree() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
