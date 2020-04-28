@@ -26,7 +26,7 @@ public interface DirectedTree<V> {
 	 * 
 	 * @param child
 	 */
-	void getParent(V child);
+	V getParent(V child);
 
 	/**
 	 * 

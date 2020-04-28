@@ -69,19 +69,22 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 
 	@Override
 	public V getRoot() {
-		// TODO Auto-generated method stub
-		return root.vertex;
-	}
 
-	@Override
-	public void getParent(V child) {
-		// TODO Auto-generated method stub
+		return root.vertex;
 		
 	}
 
 	@Override
+	public V getParent(V child) {
+		
+		TreeNode<V> childNode =findTreeNode(root, child);
+		return childNode.parent.vertex;
+
+	}
+
+	@Override
 	public void removeNode(V vertex) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
