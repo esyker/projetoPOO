@@ -1,14 +1,10 @@
 package directedTree;
 
+import java.util.List;
+
 import graph.*;
 
 public interface DirectedTree<V> {
-
-	/**
-	 * 
-	 * @param vertex
-	 */
-	void addRoot(V vertex);
 
 	/**
 	 * 
@@ -17,11 +13,12 @@ public interface DirectedTree<V> {
 	 */
 	void addChild(V parent, V child);
 
+	
 	/**
 	 * 
 	 * @param parent
 	 */
-	V[] getChildren(V parent);
+	List<V> getChildren(V parent);
 
 	V getRoot();
 
@@ -29,7 +26,7 @@ public interface DirectedTree<V> {
 	 * 
 	 * @param child
 	 */
-	void getParent(V child);
+	V getParent(V child);
 
 	/**
 	 * 
