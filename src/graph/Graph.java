@@ -1,4 +1,5 @@
 package graph;
+import java.util.List;
 
 public interface Graph<V> {
 
@@ -6,14 +7,14 @@ public interface Graph<V> {
 	 * 
 	 * @param vertex
 	 */
-	void addVertex(V vertex);
+	boolean addVertex(V vertex);
 
 	/**
 	 * 
 	 * @param v1
 	 * @param v2
 	 */
-	void addEdge(V v1, V v2);
+	boolean addEdge(V v1, V v2);
 
 	/**
 	 * 
@@ -21,22 +22,22 @@ public interface Graph<V> {
 	 * @param v2
 	 * @param weight
 	 */
-	void setEdgeWeight(V v1, V v2, float weight);
+	boolean setEdgeWeight(V v1, V v2, float weight);
 
 	/**
 	 * 
 	 * @param v1
 	 * @param v2
 	 */
-	void removeEdge(V v1, V v2);
+	boolean removeEdge(V v1, V v2);
 
 	/**
 	 * 
 	 * @param v
 	 */
-	void removeVertex(V v);
+	boolean removeVertex(V v);
 
-	V[] getVertices();
+	List<V> getVertices();
 
 	/**
 	 * 

@@ -1,52 +1,94 @@
 package graph;
 
-public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<Object> {
+import java.util.List;
 
-	public SpanningTree() {
-		// TODO - implement SpanningTree.SpanningTree
-		throw new UnsupportedOperationException();
+public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
+
+	private int currSize=0;
+	private int max_numb_vertices;
+	
+	public SpanningTree(int max_numb_vertices) {
+		super();
+		this.weight_matrix=new float[max_numb_vertices][max_numb_vertices];
+		this.max_numb_vertices=max_numb_vertices;
 	}
 
 	@Override
-	public void addVertex(Object vertex) {
-		// TODO Auto-generated method stub
+	public boolean addVertex(V vertex) {
+
+		if(currSize==this.max_numb_vertices||this.vertices.contains(vertex))
+			return false;
+
+		this.vertices.add(vertex);
+		this.currSize++;
+		return true;
+	}
+	
+	@Override
+	public boolean addEdge(V v1, V v2) {
+
+		int index1=this.vertices.indexOf(v1);
+		int index2=this.vertices.indexOf(v2);
 		
+		if(index1!=-1 && index2!=-1) {
+			this.weight_matrix[index1][index2]=0;
+			this.weight_matrix[index2][index1]=0;
+			return true;
+		}
+		return false;
 	}
-
+	
+	
 	@Override
-	public void addEdge(Object v1, Object v2) {
-		// TODO Auto-generated method stub
+	public boolean setEdgeWeight(V v1, V v2, float weight) {
+
+		int index1=this.vertices.indexOf(v1);
+		int index2=this.vertices.indexOf(v2);
 		
-	}
-
-	@Override
-	public void setEdgeWeight(Object v1, Object v2, float weight) {
-		// TODO Auto-generated method stub
+		if(index1!=-1 && index2!=-1) {
+			this.weight_matrix[index1][index2]=weight;
+			this.weight_matrix[index2][index1]=weight;
+			return true;
+		}
 		
+		return false;
 	}
 
 	@Override
-	public void removeEdge(Object v1, Object v2) {
-		// TODO Auto-generated method stub
+	public boolean removeEdge(V v1, V v2) {
 		
-	}
-
-	@Override
-	public void removeVertex(Object v) {
-		// TODO Auto-generated method stub
+		int index1=this.vertices.indexOf(v1);
+		int index2=this.vertices.indexOf(v2);
 		
+		if(index1!=-1 && index2!=-1) {
+			this.weight_matrix[index1][index2]=-1;
+			this.weight_matrix[index2][index1]=-1;
+			return true;
+		}
+		return false;
 	}
 
 	@Override
-	public Object[] getVertices() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean removeVertex(Object v) {
+		return false;
 	}
 
 	@Override
-	public float getEdgeWeight(Object v1, Object v2) {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<V> getVertices() {
+		
+		return this.vertices;
+	}
+
+	@Override
+	public float getEdgeWeight(V v1, V v2) {
+		
+		int index1=this.vertices.indexOf(v1);
+		int index2=this.vertices.indexOf(v2);
+		
+		if(index1!=-1 && index2!=-1)
+			return (this.weight_matrix[index1][index2]);
+		
+		return -1;
 	}
 
 }
