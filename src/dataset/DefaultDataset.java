@@ -1,11 +1,8 @@
 package dataset;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
-public class DefaultDataset implements Dataset, CsvLoadable {
+public class DefaultDataset implements Dataset {
 
 	protected List<Instance> instacesList;
 	
@@ -16,59 +13,7 @@ public class DefaultDataset implements Dataset, CsvLoadable {
 		this.attributes = attributes;
 	}
 
-	/**
-	 * 
-	 * @param fileName - name of csv file load dataset from
-	 */
-	public DefaultDataset(String fileName) {
-		instacesList = new LinkedList<Instance>();
-		loadFromCsvFile(fileName);
-		
-	}
 
-	@Override
-	public void loadFromCsvFile(String fileName) {
-		
-        String line = "";
-        String csvSplitBy = ",";
-
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-        	
-        	if((line = br.readLine()) != null)  //read the first line
-			{	
-	        	String[] header = line.split(csvSplitBy);
-	        	
-	        	Attribute[] atts = new Attribute[header.length-1];
-	        	
-	        	for(int i = 0; i < atts.length; i++)
-	        	{
-	        		atts[i] = new Attribute(header[i]);
-	        	}
-	        	this.attributes = atts;
-			}
-        	
-
-
-            while ((line = br.readLine()) != null) {
-            	
-            	String[] values = line.split(csvSplitBy);
-                //create an instance for each line and add to dataset
-            	Instance inst = new DefaultInstance();
-            	for(int i = 0; i < values.length - 1; i++)
-            	{
-            		inst.setAttValue(this.attributes[i], Integer.parseInt(values[i]));
-            		
-            	}
-            	inst.setClassValue(Integer.parseInt(values[values.length-1]));
-            	add(inst);
-
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		
-	}
 
 	@Override
 	public boolean add(Instance i) {
