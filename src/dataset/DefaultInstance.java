@@ -4,48 +4,69 @@ import java.util.*;
 
 public class DefaultInstance implements Instance {
 
-	Collection<Integer> integer;
+	protected Map<Attribute, Integer> attributeValues;
 	protected int classValue;
 
 	public DefaultInstance() {
-		// TODO - implement DefaultInstance.DefaultInstance
-		throw new UnsupportedOperationException();
+		attributeValues = new HashMap<Attribute,Integer>();
+		classValue = -1;
 	}
 
 	@Override
-	public void setClass(int c) {
-		// TODO Auto-generated method stub
+	public boolean setClassValue(int c) {
+		if(c >= 0)
+		{
+			this.classValue = c;
+			return true;
+		}
+		else
+			return false;
 		
 	}
 
 	@Override
-	public int getclass() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getClassValue() {
+		return classValue;
 	}
 
 	@Override
 	public void setAttValue(Attribute a, int v) {
-		// TODO Auto-generated method stub
+		attributeValues.put(a, Integer.valueOf(v));
 		
 	}
 
 	@Override
 	public int getAttValue(Attribute a) {
-		// TODO Auto-generated method stub
-		return 0;
+		Integer i = attributeValues.get(a);
+		if(i == null)
+			return -1;
+		else return i.intValue();
 	}
 
 	@Override
 	public void removeAttribute(Attribute a) {
-		// TODO Auto-generated method stub
+		attributeValues.remove(a);
 		
 	}
 
 	@Override
-	public int getNumAttributes() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Attribute[] getAttributes() {
+		return attributeValues.keySet().toArray(new Attribute[0]);
 	}
+
+	@Override
+	public boolean hasAttributes(Attribute[] attributes) {
+
+		for(Attribute a:attributes)
+		{
+			if(!attributeValues.containsKey(a))
+				return false;
+		}
+		return true;
+	}
+
+		
+
+	
 
 }
