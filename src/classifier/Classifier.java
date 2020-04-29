@@ -6,14 +6,15 @@ import dataset.Instance;
 public interface Classifier {
 
 	/**
-	 * 
-	 * @param data
+	 * Build the classifier from the given training dataset
+	 * @param data - training dataset
 	 */
 	void buildClassifier(Dataset data);
 
 	/**
-	 * 
-	 * @param i
+	 * Classify an instance with the classifier
+	 * @param i - instance to classify
+	 * @return classification 
 	 */
 	int classify(Instance i);
 
