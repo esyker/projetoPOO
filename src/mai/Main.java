@@ -1,5 +1,6 @@
 package mai;
 import graph.DenseUndirectedWeightedGraph;
+import graph.SpanningTree;
 import graph.PrimMaxSpanningTree;
 
 public class Main {
@@ -32,11 +33,12 @@ public class Main {
 			System.out.println("\n");
 		}*/
 
-		System.out.print(graph);
-		System.out.print(graph.getVertices());
+		System.out.println(graph);
 		
 		PrimMaxSpanningTree<Integer> tree =new PrimMaxSpanningTree<Integer>(graph);
-		tree.primMST();
+		SpanningTree<Integer> spanningTree=tree.getSpanningTree();
+		System.out.print(spanningTree);
+		
 	}
 	
 }

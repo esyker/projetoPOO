@@ -104,7 +104,13 @@ public class DenseUndirectedWeightedGraph<V> extends AbstractUndirectedWeightedG
 			}
 			to_str+="\n";
 		}
+		
+		to_str+=("Vertices:"+this.getVertices()+"\n");
 		return to_str;
+	}
+	
+	public V getVertexFromIndex(int index) {
+		return this.vertices.get(index);
 	}
 
 	public int getNumbVertecis() {

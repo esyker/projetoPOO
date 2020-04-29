@@ -1,16 +1,19 @@
 package graph;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 
-	private int currSize=0;
+	private int currSize;
 	private int max_numb_vertices;
 	
 	public SpanningTree(int max_numb_vertices) {
 		super();
 		this.weight_matrix=new float[max_numb_vertices][max_numb_vertices];
 		this.max_numb_vertices=max_numb_vertices;
+		this.vertices= new LinkedList<V>();
+		this.currSize=0;
 	}
 
 	@Override
@@ -102,10 +105,16 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 			}
 			to_str+="\n";
 		}
+		
+		to_str+=("Vertices:"+this.getVertices()+"\n");
 		return to_str;
 	}
 	
-	public int getNumbNodes() {
+	public V getVertexFromIndex(int index) {
+		return this.vertices.get(index);
+	}
+	
+	public int getNumbVertices() {
 		return this.currSize;
 	}
 	
