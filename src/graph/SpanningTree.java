@@ -30,9 +30,9 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 		int index1=this.vertices.indexOf(v1);
 		int index2=this.vertices.indexOf(v2);
 		
-		if(index1!=-1 && index2!=-1) {
-			this.weight_matrix[index1][index2]=0;
-			this.weight_matrix[index2][index1]=0;
+		if(index1!=-1 && index2!=-1&&index1!=index2) {
+			this.weight_matrix[index1][index2]=1;
+			this.weight_matrix[index2][index1]=1;
 			return true;
 		}
 		return false;
@@ -45,7 +45,7 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 		int index1=this.vertices.indexOf(v1);
 		int index2=this.vertices.indexOf(v2);
 		
-		if(index1!=-1 && index2!=-1) {
+		if(index1!=-1 && index2!=-1 && index1!=index2) {
 			this.weight_matrix[index1][index2]=weight;
 			this.weight_matrix[index2][index1]=weight;
 			return true;
@@ -61,8 +61,8 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 		int index2=this.vertices.indexOf(v2);
 		
 		if(index1!=-1 && index2!=-1) {
-			this.weight_matrix[index1][index2]=-1;
-			this.weight_matrix[index2][index1]=-1;
+			this.weight_matrix[index1][index2]=0;
+			this.weight_matrix[index2][index1]=0;
 			return true;
 		}
 		return false;
@@ -89,6 +89,28 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 			return (this.weight_matrix[index1][index2]);
 		
 		return -1;
+	}
+	
+	@Override
+	public String toString() {
+		
+		String to_str= new String();
+		for(int i=0;i<this.currSize;i++) {
+			for(int j=0;j<this.currSize;j++)
+			{
+				to_str+=(this.getWeightsMatrix()[i][j]+ " ");
+			}
+			to_str+="\n";
+		}
+		return to_str;
+	}
+	
+	public int getNumbNodes() {
+		return this.currSize;
+	}
+	
+	public float [][] getWeightsMatrix(){
+		return this.weight_matrix;
 	}
 
 }

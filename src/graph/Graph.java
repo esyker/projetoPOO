@@ -45,5 +45,5 @@ public interface Graph<V> {
 	 * @param v2
 	 */
 	float getEdgeWeight(V v1, V v2);
-
+	
 }
