@@ -1,7 +1,6 @@
-/classifier/
-/dataset/
-/directedTree/
-/graph/
 /.classpath
 /.project
-/main/
+/graph/
+/directedTree/
+/mai/
+/dataset/
