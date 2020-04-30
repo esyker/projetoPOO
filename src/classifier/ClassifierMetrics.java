@@ -1,39 +1,38 @@
 package classifier;
 
 import dataset.*;
+import java.time.Instant;
+import java.time.Duration;
 
 public class ClassifierMetrics {
 
 	Classifier classifier;
-
+	Dataset trainData,testData;
+	long timeToBuild;
+	long timeToTest;
+	
 	public void getF1Score() {
-		// TODO - implement ClassifierMetrics.getF1Score
-		throw new UnsupportedOperationException();
+		
 	}
 
 	public void getAccuracy() {
-		// TODO - implement ClassifierMetrics.getAccuracy
-		throw new UnsupportedOperationException();
+		
 	}
 
-	public void getTimeToBuild() {
-		// TODO - implement ClassifierMetrics.getTimeToBuild
-		throw new UnsupportedOperationException();
+	public long getTimeToBuild() {
+		return this.timeToBuild;
 	}
 
-	public void getTimeToTest() {
-		// TODO - implement ClassifierMetrics.getTimeToTest
-		throw new UnsupportedOperationException();
+	public long getTimeToTest() {
+		return this.timeToTest;
 	}
 
 	public void getSpecifity() {
-		// TODO - implement ClassifierMetrics.getSpecifity
-		throw new UnsupportedOperationException();
+		
 	}
 
 	public void getSensitivity() {
-		// TODO - implement ClassifierMetrics.getSensitivity
-		throw new UnsupportedOperationException();
+		
 	}
 
 	/**
@@ -43,8 +42,22 @@ public class ClassifierMetrics {
 	 * @param testData
 	 */
 	public ClassifierMetrics(Classifier c, Dataset trainData, Dataset testData) {
-		// TODO - implement ClassifierMetrics.ClassifierMetrics
-		throw new UnsupportedOperationException();
+		this.classifier=c;
+		this.testData=testData;
+		this.trainData=trainData;
+		
+		//Build
+		Instant build_start = Instant.now();
+		this.classifier.buildClassifier(this.trainData);
+		Instant build_finish = Instant.now();
+		this.timeToBuild= Duration.between(build_start,build_finish).toMillis();
+		
+		//Test
+		//Instant test_start = Instant.now();
+		//this.classifier.buildClassifier(this.trainData);
+		//Instant test_finish = Instant.now();
+		//this.timeToTest= Duration.between(test_start,test_finish).toMillis();
+		
 	}
 
 }

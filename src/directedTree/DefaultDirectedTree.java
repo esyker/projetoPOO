@@ -12,11 +12,11 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 	public DefaultDirectedTree(V vertex) {
 		root = new TreeNode<V>(vertex);
 	}
-	
+
 	public DefaultDirectedTree() {
 		
 	}
-	
+
 
 	@Override
 	public void addChild(V parent, V child) {
@@ -112,13 +112,14 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 
 	@Override
 	public void loadFromSpanningTree(SpanningTree<V> s) {
-		
+
 		int index=s.findHeight();
 		V vertex= s.getVertexFromIndex(index);
 		
 		root=new TreeNode<V>(vertex);
 		
 		fillnode(root, s, index, index);
+
 		
 	}
 		
