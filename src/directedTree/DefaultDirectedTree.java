@@ -29,8 +29,8 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 	TreeNode<V> findTreeNode(TreeNode<V> iter, V find) {
 		TreeNode<V> aux=iter;
 		TreeNode<V> res=null;
+		List<V> vertix = new ArrayList<V>();
 		int i = aux.children.size();
-		
 		
 		if (find.equals(aux.vertex))
 		{
@@ -39,7 +39,8 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		//else
 		for (int j=0; j < i; j++)
 		{
-			if (find.equals(aux.children.get(j).vertex))
+			vertix.add(aux.children.get(j).vertex);
+			if (find.equals(vertix.get(j)))
 			{
 				res=aux.children.get(j);
 				return res;
@@ -98,16 +99,13 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 			
 		int size=s.getNumbVertices();
 		float[][] matrix=s.getWeightsMatrix();
-		int childnumb=0;
 		
 		for (int j=0; j < size; j++)
 		{
 			if (matrix[index][j]!=0 && j!=previus)
 			{
 				node.addChild(s.getVertexFromIndex(j));
-				fillnode(node.children.get(childnumb),s, j, index);
-				childnumb++;
-				
+				fillnode(node,s, j, index);	
 			}
 		}
 	}
@@ -125,7 +123,7 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		
 	}
 		
-
+/*
 public static void main (String [] args) {
 		
 		DefaultDirectedTree<String> tree0 =  new DefaultDirectedTree<String>("root");
@@ -140,6 +138,6 @@ public static void main (String [] args) {
 	    
 	
 	}       
-
+*/
 }
 
