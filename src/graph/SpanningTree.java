@@ -208,6 +208,7 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 		return res;
 	}
 
+    //return the index that produces the shortest tree
     public int findHeight() { 
     	int i;
 
