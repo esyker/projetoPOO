@@ -17,5 +17,10 @@ public interface Classifier {
 	 * @return classification 
 	 */
 	int classify(Instance i);
+	
+	/**
+	 * 
+	 */
+	int[] classify(Dataset d);
 
 }

@@ -241,5 +241,17 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		}
 		return class_max;
 	}
+	
+	@Override
+	public int[] classify(Dataset d) {
+		int num_instances = d.getNumberOfInstances();
+		int[] classification = new int[d.getNumberOfInstances()];
+		for(int i = 0; i < num_instances; i++)
+		{
+			Instance inst = d.getInstance(i);
+			classification[i] = classify(inst);
+		}
+		return classification;
+	}
 
 }
