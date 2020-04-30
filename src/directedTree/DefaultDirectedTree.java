@@ -27,27 +27,29 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 	}
 	
 	TreeNode<V> findTreeNode(TreeNode<V> iter, V find) {
-		TreeNode<V> aux=iter;
-		TreeNode<V> res=null;
-		List<V> vertix = new ArrayList<V>();
-		int i = aux.children.size();
+		TreeNode<V> res=iter;
+		int nChilds = iter.children.size();
 		
-		if (find.equals(aux.vertex))
+		//if find==iter.vertex
+		if (find.equals(iter.vertex))
 		{
-			return aux;
+			return iter;
 		}
 		//else
-		for (int j=0; j < i; j++)
+		for (int j=0; j < nChilds; j++)
 		{
-			vertix.add(aux.children.get(j).vertex);
-			if (find.equals(vertix.get(j)))
+			//if child(j)==find
+			if (find.equals(iter.children.get(j).vertex))
 			{
-				res=aux.children.get(j);
-				return res;
+				return iter.children.get(j);
 			}
 			else
 			{
-				res=findTreeNode(aux, find);
+				if (find.equals(res.vertex))
+				{
+					return res;
+				}
+				res=findTreeNode(iter.children.get(j), find);
 			}
 		}
 		
@@ -61,8 +63,9 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		List<V> vertix = new ArrayList<V>();
 		
 		parentNode=findTreeNode(root, parent);
-		if (parentNode ==null) return null;
 		int i = parentNode.children.size();
+		if (i==0) return null;
+		
 		
 		for (int j=0; j < i; j++)
 		{
@@ -82,8 +85,14 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 	@Override
 	public List<V> getParent(V child) {
 		
+		if (child.equals(root.vertex))
+		{
+			return null;
+		}
+		
 		List<V> parent = new ArrayList<V>();
 		TreeNode<V> childNode =findTreeNode(root, child);
+
 		parent.add(childNode.parent.vertex);
 		return parent;
 
@@ -104,8 +113,8 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		{
 			if (matrix[index][j]!=0 && j!=previus)
 			{
-				node.addChild(s.getVertexFromIndex(j));
-				fillnode(node,s, j, index);	
+				TreeNode<V> childnode=node.addChild(s.getVertexFromIndex(j));
+				fillnode(childnode,s, j, index);	
 			}
 		}
 	}

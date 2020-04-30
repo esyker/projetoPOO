@@ -1,4 +1,5 @@
 package mai;
+import directedTree.DefaultDirectedTree;
 import graph.DenseUndirectedWeightedGraph;
 import graph.SpanningTree;
 import graph.PrimMaxSpanningTree;
@@ -41,10 +42,26 @@ public class Main {
 
 		System.out.print(spanningTree);
 		System.out.println(spanningTree.isTree());
-
-
-		
 		System.out.println(graph.isTree());
+		
+		DefaultDirectedTree<Integer> tree0 =  new DefaultDirectedTree<Integer>();
+	    
+		tree0.loadFromSpanningTree(spanningTree);
+		
+		System.out.println(tree0.getParent(1));
+		System.out.println(tree0.getParent(3));
+		System.out.println(tree0.getParent(0));
+		System.out.println(tree0.getParent(4));
+		System.out.println(tree0.getParent(2)+"\n");
+		
+		System.out.println(tree0.getChildren(1));
+		System.out.println(tree0.getChildren(3));
+		System.out.println(tree0.getChildren(0));
+		System.out.println(tree0.getChildren(4));
+		System.out.println(tree0.getChildren(2));
+		
+		
+		
 	}
 	
 }

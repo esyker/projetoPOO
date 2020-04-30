@@ -20,10 +20,12 @@ public class TreeNode<V> {
 	 * 
 	 * @param vertex
 	 */
-	public void addChild(V vertex) {
+	public TreeNode<V> addChild(V vertex) {
 		TreeNode<V> childNode = new TreeNode<V>(vertex);
 		childNode.parent = this;
 		this.children.add(childNode);
+		
+		return childNode;
 	}
 	
 
