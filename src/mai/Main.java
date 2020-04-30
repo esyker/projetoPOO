@@ -2,6 +2,7 @@ package mai;
 import graph.DenseUndirectedWeightedGraph;
 import graph.SpanningTree;
 import graph.PrimMaxSpanningTree;
+import directedTree.*;
 
 public class Main {
 	
@@ -30,7 +31,7 @@ public class Main {
 			}
 			System.out.println("\n");
 		}*/
-
+	
 		System.out.println(graph);
 		
 		PrimMaxSpanningTree<Integer> tree =new PrimMaxSpanningTree<Integer>(graph);
@@ -41,10 +42,14 @@ public class Main {
 
 		System.out.print(spanningTree);
 		System.out.println(spanningTree.isTree());
+		DefaultDirectedTree<Integer> tree1 =  new DefaultDirectedTree<Integer>();
+		tree1.loadFromSpanningTree(spanningTree);
 
-
+		System.out.println(tree1.getRoot());
+		System.out.println(tree1.getChildren(0));
 		
-		System.out.println(graph.isTree());
+		
+		//System.out.println(graph.isTree());
 	}
 	
 }
