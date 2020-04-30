@@ -35,9 +35,16 @@ public class Main {
 		
 		PrimMaxSpanningTree<Integer> tree =new PrimMaxSpanningTree<Integer>(graph);
 		SpanningTree<Integer> spanningTree=tree.getSpanningTree();
+
 		System.out.print(spanningTree.toString());
 		System.out.println(spanningTree.findHeight());
+
+		System.out.print(spanningTree);
+		System.out.println(spanningTree.isTree());
+
+
 		
+		System.out.println(graph.isTree());
 	}
 	
 }
