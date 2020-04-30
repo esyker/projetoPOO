@@ -6,6 +6,7 @@ import graph.*;
 
 public interface DirectedTree<V> {
 
+	
 	/**
 	 * 
 	 * @param parent
@@ -13,7 +14,6 @@ public interface DirectedTree<V> {
 	 */
 	void addChild(V parent, V child);
 
-	
 	/**
 	 * 
 	 * @param parent
