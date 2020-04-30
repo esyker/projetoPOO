@@ -12,6 +12,10 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 	public DefaultDirectedTree(V vertex) {
 		root = new TreeNode<V>(vertex);
 	}
+	
+	public DefaultDirectedTree() {
+		
+	}
 
 	@Override
 	public void addChild(V parent, V child) {
@@ -94,7 +98,8 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 
 	@Override
 	public void loadFromSpanningTree(SpanningTree<V> s) {
-		// TODO Auto-generated method stub
+		
+		
 		
 	}
 		
