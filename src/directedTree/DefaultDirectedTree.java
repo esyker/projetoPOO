@@ -75,10 +75,12 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 	}
 
 	@Override
-	public V getParent(V child) {
+	public List<V> getParent(V child) {
 		
+		List<V> parent = new ArrayList<V>();
 		TreeNode<V> childNode =findTreeNode(root, child);
-		return childNode.parent.vertex;
+		parent.add(childNode.parent.vertex);
+		return parent;
 
 	}
 
@@ -87,6 +89,8 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		
 		
 	}
+	
+	
 
 	@Override
 	public void loadFromSpanningTree(SpanningTree<V> s) {

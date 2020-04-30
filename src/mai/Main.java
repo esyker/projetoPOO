@@ -12,8 +12,6 @@ public class Main {
 		graph.addVertex(2);
 		graph.addVertex(3);
 		graph.addVertex(4);
-		graph.addVertex(5);
-		graph.addVertex(6);
 		graph.setEdgeWeight(0,1,2);
 		graph.setEdgeWeight(0,3,6);
 		graph.setEdgeWeight(1,2,3);
@@ -37,7 +35,8 @@ public class Main {
 		
 		PrimMaxSpanningTree<Integer> tree =new PrimMaxSpanningTree<Integer>(graph);
 		SpanningTree<Integer> spanningTree=tree.getSpanningTree();
-		System.out.print(spanningTree);
+		System.out.print(spanningTree.toString());
+		System.out.println(spanningTree.findHeight());
 		
 	}
 	

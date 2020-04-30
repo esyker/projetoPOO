@@ -1,7 +1,10 @@
 package graph;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import directedTree.TreeNode;
 
 public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 
@@ -121,5 +124,49 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 	public float [][] getWeightsMatrix(){
 		return this.weight_matrix;
 	}
+	
+    private int findDepth(int i, int previus) {
+    	int aux =i;
+		int res=0;
+		int res1=0;
+		
+
+		for (int j=0; j < currSize; j++)
+		{
+			if (weight_matrix[aux][j]!=0 && j!=previus)
+			{
+				res1=findDepth(j, aux);
+				res1++;
+				if (res1>res)res=res1;	
+			}
+		}
+		
+		return res;
+	}
+
+    public int findHeight() { 
+    	int i;
+
+        int depth[] = new int[currSize]; 
+        for (i = 0; i < currSize; i++) { 
+            depth[i] = 0; 
+        } 
+  
+        for (i=0; i < currSize; i++)
+        {
+        	depth[i]=findDepth(i,0); 
+        }
+        int index=0;
+        int ht = depth[0]; 
+        for (i = 1; i < currSize; i++) { 
+            if (ht < depth[i]) { 
+                ht = depth[i]; 
+                index=i;
+            } 
+        } 
+        return index; 
+    }
+	
+	
 
 }
