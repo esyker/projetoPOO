@@ -60,7 +60,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		Attribute[] atts = trainSet.getAttributes();
 		for(Attribute a:atts)
 		{
-			Attribute a_parent = directedTree.getParent(a);
+			Attribute a_parent = directedTree.getParent(a).get(0);
 			if(a_parent == null)
 			{
 				joint_prob*=computeOFE(a,0,i.getAttValue(a),c);
@@ -85,7 +85,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		int numInstances = trainSet.getNumberOfInstances();
 		Instance inst;
 		int count = 0;
-		Attribute i_parent = directedTree.getParent(i);
+		Attribute i_parent = directedTree.getParent(i).get(0);
 		//TODO make dataset iterable???
 		for(int a = 0; a < numInstances; a++)
 		{
@@ -115,7 +115,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		int numInstances = trainSet.getNumberOfInstances();
 		Instance inst;
 		int count = 0;
-		Attribute i_parent = directedTree.getParent(i);
+		Attribute i_parent = directedTree.getParent(i).get(0);
 		//TODO make dataset iterable???
 		for(int a = 0; a < numInstances; a++)
 		{
