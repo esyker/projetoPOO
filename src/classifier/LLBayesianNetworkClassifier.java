@@ -19,6 +19,8 @@ public class LLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifi
 		int r_i = trainSet.getMaxAttributeValue(i);
 		int s = trainSet.getMaxClassValue();
 		
+		//TODO
+		//iterações começam em 1
 		for(int c = 0; c <= s; c++)
 		{
 			int Nc = computeNc(c);
@@ -30,6 +32,9 @@ public class LLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifi
 					int Nikc_J = computeNikc_J(i,k,c);
 					int Nijkc = computeNijkc(i,j,k,c);
 					if(Nijkc != 0)
+						//TODO
+						//computeN() meter numa variável?
+						//verificar Nikc_J==0, Nc==0, Nijc_K==0?
 						alpha += Nijkc/computeN() * log2((float)(Nijkc*Nc)/(Nikc_J*Nijc_K));
 					
 				}

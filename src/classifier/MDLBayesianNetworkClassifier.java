@@ -18,7 +18,8 @@ public class MDLBayesianNetworkClassifier extends AbstractBayesianNetworkClassif
 		int q_i = trainSet.getMaxAttributeValue(_j);
 		int r_i = trainSet.getMaxAttributeValue(i);
 		int s = trainSet.getMaxClassValue();
-		
+		//TODO
+		//iterações começam em 1
 		for(int c = 0; c <= s; c++)
 		{
 			int Nc = computeNc(c);
@@ -30,14 +31,19 @@ public class MDLBayesianNetworkClassifier extends AbstractBayesianNetworkClassif
 					int Nikc_J = computeNikc_J(i,k,c);
 					int Nijkc = computeNijkc(i,j,k,c);
 					if(Nijkc != 0)
+						//TODO
+						//computeN() meter numa variavel
+						//verificar Nikc_J==0, Nc==0, Nijc_K==0?
 						alpha += Nijkc/computeN() * log2((float)(Nijkc*Nc)/(Nikc_J*Nijc_K));
 					
 				}
 			}
 		}
-		
+		//TODO
+		//verificar Nikc_J==0, Nc==0, Nijc_K==0?
+		//verificar N==0
+		//conta errada?
 		alpha -= (s+1) * r_i * q_i * Math.log(computeN()) / 2;
-		
 		return alpha;
 	}
 	
