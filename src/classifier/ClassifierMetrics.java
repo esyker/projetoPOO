@@ -3,6 +3,7 @@ package classifier;
 import dataset.*;
 import java.time.Instant;
 import java.time.Duration;
+import java.util.ArrayList;
 
 public class ClassifierMetrics {
 
@@ -11,62 +12,59 @@ public class ClassifierMetrics {
 	
 	int[] predicted_classes;
 	int[] true_classes;
+	ArrayList<Integer> classes;
+	int numb_classes;
+	int total;
 	
-	//metrics;
-	int true_positives,true_negatives,false_positives,false_negatives;
 	long timeToBuild;
-	long timeToTest;
-	double f1score,accuracy,specificity,sensitivity,precision; 
-
-	void computeAccuracy() {
-		this.accuracy=(this.true_positives+this.true_negatives)/(this.false_negatives+this.false_positives
-				+this.true_positives+this.true_negatives);
-	}
-
-	void computeSpecifity() {
-		this.specificity=(this.true_negatives)/(this.true_negatives+this.false_positives);
-	}
-
-	void computeSensitivity() {
-		this.sensitivity= (this.true_positives)/(this.true_positives+this.false_negatives);
-	}
+	long timeToTest; 
+	float accuracy;
+	float[] f1score,specificity,sensitivity,precision; 
 	
-	void computePrecision() {
-		this.precision= (this.true_positives)/(this.true_positives+this.false_positives);
-	}
 	
-	void computeF1Score() {
-		this.f1score= 2*(this.precision*this.sensitivity)/(this.precision+this.sensitivity);
-	}
-	
-	void compute_metrics() {
-		for(int i=0;i<this.testDataset.getNumberOfInstances();i++) {
-			this.true_classes[i]=this.testDataset.getInstance(i).getClassValue();
-			
-			if(true_classes[i]==0) {
-				if(this.predicted_classes[i]==0) {
-					this.true_negatives++;
-				}
-				else
-					this.false_positives++;
-			}
-			else {//true class 1
-				if(this.predicted_classes[i]==0) {
-					this.false_negatives++;
-				}
-				else
-					this.true_positives++;
-			}
-		}
+
+	void computeMetrics() {
+		int true_negatives,false_negatives,true_positives,false_positives;
+		int correct_classifications=0;
 		
-		computeAccuracy();
-		computeSpecifity();
-		computeSensitivity();
-		computePrecision();
-		computeF1Score();
+		for (Integer i : this.classes){
+			true_negatives=0;
+			false_negatives=0;
+			true_positives=0;
+			false_positives=0;
+			
+			for(int j=0;j<this.total;j++) {
+				if(true_classes[j]!=i)//negative class
+				{
+					if(true_classes[j]==predicted_classes[j]) {
+						true_negatives++;
+					}
+					else if(true_classes[j]!=predicted_classes[j]) {
+						false_negatives++;
+					}
+				}
+				else if(true_classes[j]==i)//positive class
+				{
+					if(true_classes[j]==predicted_classes[j]) {
+						true_positives++;
+					}
+					else if(true_classes[j]!=predicted_classes[j]) {
+						false_positives++;
+					}
+				}
+			}
+			this.specificity[i]=(true_negatives)/(true_negatives+false_positives);
+			this.sensitivity[i]= (true_positives)/(true_positives+false_negatives);
+			this.precision[i]= (true_positives)/(true_positives+false_positives);
+			this.f1score[i]= 2*(this.precision[i]*this.sensitivity[i])/(this.precision[i]+this.sensitivity[i]);
+			correct_classifications+=true_positives;
+			}
+		
+		this.accuracy=correct_classifications/this.total;
+		return;
 	}
 	
-	public double getF1Score() {
+	public float[] getF1Score() {
 		return this.f1score;
 	}
 
@@ -82,15 +80,15 @@ public class ClassifierMetrics {
 		return this.timeToTest;
 	}
 
-	public double getSpecifity() {
+	public float[] getSpecifity() {
 		return this.specificity;
 	}
 
-	public double getSensitivity() {
+	public float[] getSensitivity() {
 		return this.sensitivity;
 	}
 	
-	public double getPrecision() {
+	public float[] getPrecision() {
 		return this.precision;
 	}
 
@@ -104,6 +102,9 @@ public class ClassifierMetrics {
 		this.classifier=c;
 		this.testDataset=testData;
 		this.trainDataset=trainData;
+		this.total=this.testDataset.getNumberOfInstances();
+		ArrayList<Integer> classes=new ArrayList<Integer>();
+		this.numb_classes=0;
 		
 		//Build
 		Instant build_start = Instant.now();
@@ -117,7 +118,21 @@ public class ClassifierMetrics {
 		Instant test_finish = Instant.now();
 		this.timeToTest= Duration.between(test_start,test_finish).toMillis();
 		
-		compute_metrics();
+		
+		//Get available classes type and number
+		for(int i=0; i<true_classes.length; i++){
+	        if(!classes.contains(true_classes[i])){
+	            classes.add(true_classes[i]);
+	            numb_classes++;
+	        }
+	    }
+		
+		this.f1score=new float[numb_classes+1];
+		this.specificity=new float[numb_classes+1];
+		this.sensitivity=new float[numb_classes+1];
+		this.precision=new float[numb_classes+1];
+		
+		computeMetrics();
 		
 	}
 
