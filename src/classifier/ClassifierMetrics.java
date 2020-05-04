@@ -13,6 +13,7 @@ public class ClassifierMetrics {
 	int[] predicted_classes;
 	int[] true_classes;
 	ArrayList<Integer> classes;
+	float [] weight_classes;
 	int numb_classes;
 	int total;
 	
@@ -26,6 +27,11 @@ public class ClassifierMetrics {
 	void computeMetrics() {
 		int true_negatives,false_negatives,true_positives,false_positives;
 		int correct_classifications=0;
+		//weighted metrics
+		this.specificity[this.numb_classes]=0;
+		this.sensitivity[this.numb_classes]=0;
+		this.precision[this.numb_classes]=0;
+		this.f1score[this.numb_classes]= 0;
 		
 		for (Integer i : this.classes){
 			true_negatives=0;
@@ -58,9 +64,16 @@ public class ClassifierMetrics {
 			this.precision[i]= (true_positives)/(true_positives+false_positives);
 			this.f1score[i]= 2*(this.precision[i]*this.sensitivity[i])/(this.precision[i]+this.sensitivity[i]);
 			correct_classifications+=true_positives;
+			this.weight_classes[i]=(true_positives+false_positives)/this.total;
+			//weighted metrics
+			this.specificity[this.numb_classes]+=this.weight_classes[i]*this.specificity[i];
+			this.sensitivity[this.numb_classes]+=this.weight_classes[i]*this.sensitivity[i];
+			this.precision[this.numb_classes]+=this.weight_classes[i]*this.precision[i];
+			this.f1score[this.numb_classes]+=this.weight_classes[i]*this.f1score[i];
 			}
 		
 		this.accuracy=correct_classifications/this.total;
+		
 		return;
 	}
 	
@@ -131,6 +144,7 @@ public class ClassifierMetrics {
 		this.specificity=new float[numb_classes+1];
 		this.sensitivity=new float[numb_classes+1];
 		this.precision=new float[numb_classes+1];
+		this.weight_classes=new float[numb_classes];
 		
 		computeMetrics();
 		
