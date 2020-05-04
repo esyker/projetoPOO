@@ -1,10 +1,11 @@
 package classifier;
 
 import dataset.*;
+
 import directedTree.DefaultDirectedTree;
 import directedTree.DirectedTree;
 import graph.DenseUndirectedWeightedGraph;
-import graph.Graph;
+import graph.WeightedGraph;
 import graph.PrimMaxSpanningTree;
 import graph.SpanningTree;
 import graph.SpanningTreeAlgorithm;
@@ -60,7 +61,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		Attribute[] atts = trainSet.getAttributes();
 		for(Attribute a:atts)
 		{
-			Attribute a_parent = directedTree.getParent(a).get(0);
+			Attribute a_parent = directedTree.getParent(a);
 			if(a_parent == null)
 			{
 				joint_prob*=computeOFE(a,0,i.getAttValue(a),c);
@@ -85,7 +86,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		int numInstances = trainSet.getNumberOfInstances();
 		Instance inst;
 		int count = 0;
-		Attribute i_parent = directedTree.getParent(i).get(0);
+		Attribute i_parent = directedTree.getParent(i);
 		//TODO make dataset iterable???
 		for(int a = 0; a < numInstances; a++)
 		{
@@ -115,7 +116,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		int numInstances = trainSet.getNumberOfInstances();
 		Instance inst;
 		int count = 0;
-		Attribute i_parent = directedTree.getParent(i).get(0);
+		Attribute i_parent = directedTree.getParent(i);
 		//TODO make dataset iterable???
 		for(int a = 0; a < numInstances; a++)
 		{
@@ -194,7 +195,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	public void buildClassifier(Dataset data) {
 		trainSet = data;
 		Attribute[] atts = data.getAttributes();
-		Graph<Attribute> g = new DenseUndirectedWeightedGraph<Attribute>(atts.length);
+		WeightedGraph<Attribute> g = new DenseUndirectedWeightedGraph<Attribute>(atts.length);
 		//add all vertices to graph
 		for(int i = 0; i < atts.length; i++)
 		{

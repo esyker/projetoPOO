@@ -1,7 +1,7 @@
 package graph;
 import java.util.List;
 
-public interface Graph<V> {
+public interface WeightedGraph<V> {
 
 	/**
 	 * 
@@ -35,7 +35,7 @@ public interface Graph<V> {
 	 * 
 	 * @param v
 	 */
-	boolean removeVertex(V v);
+	//boolean removeVertex(V v);
 
 	List<V> getVertices();
 
@@ -45,5 +45,11 @@ public interface Graph<V> {
 	 * @param v2
 	 */
 	float getEdgeWeight(V v1, V v2);
+	
+	boolean isGraphCyclic();
+	
+	boolean isTree();
+	
+	int getNumbVertices();
 	
 }

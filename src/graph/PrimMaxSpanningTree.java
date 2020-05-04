@@ -3,14 +3,14 @@ package graph;
 public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	
 	private int numb_vertices;
-	protected DenseUndirectedWeightedGraph<V> graph;
+	protected AbstractUndirectedWeightedGraph<V> graph;
 	/**
 	 * 
 	 * @param g
 	 */
-	public PrimMaxSpanningTree(DenseUndirectedWeightedGraph<V> g) {
+	public PrimMaxSpanningTree(AbstractUndirectedWeightedGraph<V> g) {
 		this.graph=g;
-		this.numb_vertices=this.graph.getNumbVertecis();
+		this.numb_vertices=this.graph.getNumbVertices();
 	}
 	
 	 // A utility function to find the vertex with minimum key 
@@ -36,16 +36,16 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 		// TODO Auto-generated method stub
 		 float [][] g=graph.getWeightsMatrix();
 	     // Array to store constructed MST 
-	     int parent[] = new int[graph.getNumbVertecis()]; 
+	     int parent[] = new int[graph.getNumbVertices()]; 
 
 	     // Key values used to pick minimum weight edge in cut 
-	     float key[] = new float[graph.getNumbVertecis()]; 
+	     float key[] = new float[graph.getNumbVertices()]; 
 
 	     // To represent set of vertices not yet included in MST 
-	     Boolean mstSet[] = new Boolean[graph.getNumbVertecis()]; 
+	     Boolean mstSet[] = new Boolean[graph.getNumbVertices()]; 
 
 	     // Initialize all keys as -INFINITE 
-	     for (int i = 0; i < graph.getNumbVertecis(); i++) { 
+	     for (int i = 0; i < graph.getNumbVertices(); i++) { 
 	         key[i] = -Float.MAX_VALUE; 
 	         mstSet[i] = false; 
 	     } 
@@ -56,7 +56,7 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	     parent[0] = -1; // First node is always root of MST 
 
 	     // The MST will have getNumbVertecis vertices 
-	     for (int count = 0; count < graph.getNumbVertecis() - 1; count++) { 
+	     for (int count = 0; count < graph.getNumbVertices() - 1; count++) { 
 	         // Pick thd minimum key vertex from the set of vertices 
 	         // not yet included in MST 
 	         int u = maxKey(key, mstSet); 
@@ -67,7 +67,7 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	         // Update key value and parent index of the adjacent 
 	         // vertices of the picked vertex. Consider only those 
 	         // vertices which are not yet included in MST 
-	         for (int v = 0; v < graph.getNumbVertecis(); v++) 
+	         for (int v = 0; v < graph.getNumbVertices(); v++) 
 
 	             // graph[u][v] is non zero only for adjacent vertices of m 
 	             // mstSet[v] is false for vertices not yet included in MST 

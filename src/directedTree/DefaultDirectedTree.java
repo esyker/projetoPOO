@@ -83,26 +83,21 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 	}
 
 	@Override
-	public List<V> getParent(V child) {
+	public V getParent(V child) {
 		
 		if (child.equals(root.vertex))
 		{
 			return null;
 		}
 		
-		List<V> parent = new ArrayList<V>();
-		TreeNode<V> childNode =findTreeNode(root, child);
+		TreeNode<V> childNode = findTreeNode(root, child);
 
-		parent.add(childNode.parent.vertex);
-		return parent;
+		
+		return childNode.parent.vertex;
 
 	}
 
-	@Override
-	public void removeNode(V vertex) {
-		
-		
-	}
+	
 	
 	private void fillnode(TreeNode<V> node, SpanningTree<V> s, int index, int previus) {
 			

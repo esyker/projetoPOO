@@ -5,7 +5,7 @@ import java.util.*;
 public class TreeNode<V> {
 
 	TreeNode<V> parent;
-	LinkedList<TreeNode<V>> children;
+	List<TreeNode<V>> children;
 	protected V vertex;
 	
 	//Constructor

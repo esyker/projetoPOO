@@ -26,13 +26,13 @@ public interface DirectedTree<V> {
 	 * 
 	 * @param child
 	 */
-	List<V> getParent(V child);
+	V getParent(V child);
 
 	/**
 	 * 
 	 * @param vertex
 	 */
-	void removeNode(V vertex);
+	//void removeNode(V vertex);
 
 	/**
 	 * 
