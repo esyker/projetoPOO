@@ -13,33 +13,28 @@ public class LLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifi
 	 * @param i
 	 * @param j
 	 */
-	protected float computeWeight(Attribute i, Attribute _j) {
+	protected float computeWeight(Attribute i, Attribute i_prime) {
 		float alpha = 0;
-		int q_i = trainSet.getMaxAttributeValue(_j);
+		int q_i = trainSet.getMaxAttributeValue(i_prime);
 		int r_i = trainSet.getMaxAttributeValue(i);
 		int s = trainSet.getMaxClassValue();
-		//TODO
-		//iterações começam em 1
 		int N = computeN();
 		for(int c = 0; c <= s; c++)
 		{
 			int Nc = computeNc(c);
 			for(int j = 0; j <= q_i; j++)
 			{
-				int Nijc_K = computeNijc_K(i,j,c);
+				int Nijc_K = computeNikc(i_prime,j,c);
 				for(int k = 0; k <= r_i; k++)
 				{
-					int Nikc_J = computeNikc_J(i,k,c);
-					int Nijkc = computeNijkc(i,j,k,c);
+					int Nikc_J = computeNikc(i,k,c);
+					int Nijkc = computeNijkc(i,i_prime,j,k,c);
 					if(Nijkc != 0)
-						//TODO
-						//verificar Nikc_J==0, Nc==0, Nijc_K==0?
 						alpha += Nijkc/N * log2((float)(Nijkc*Nc)/(Nikc_J*Nijc_K));
 					
 				}
 			}
 		}
-		
 		
 		return alpha;
 	}

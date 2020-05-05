@@ -4,8 +4,8 @@ import dataset.*;
 
 import directedTree.DefaultDirectedTree;
 import directedTree.DirectedTree;
+import graph.AbstractUndirectedWeightedGraph;
 import graph.DenseUndirectedWeightedGraph;
-import graph.WeightedGraph;
 import graph.PrimMaxSpanningTree;
 import graph.SpanningTree;
 import graph.SpanningTreeAlgorithm;
@@ -34,9 +34,9 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	 * @param k
 	 * @param c
 	 */
-	protected float computeOFE(Attribute i, int j, int k, int c) {
+	protected float computeOFE(Attribute i, Attribute i_parent, int j, int k, int c) {
 		int r_i = trainSet.getMaxAttributeValue(i) + 1;
-		float OFE = (computeNijkc(i,j,k,c)+N_prime)/(computeNijc_K(i,j,c) + r_i * N_prime);
+		float OFE = (computeNijkc(i,i_parent,j,k,c)+N_prime)/(computeNikc(i_parent,j,c) + r_i * N_prime);
 		return OFE;
 	}
 
@@ -62,100 +62,66 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		for(Attribute a:atts)
 		{
 			Attribute a_parent = directedTree.getParent(a);
-			if(a_parent == null)
-			{
-				joint_prob*=computeOFE(a,0,i.getAttValue(a),c);
-			}
-			else
-			{
-				joint_prob*=computeOFE(a,i.getAttValue(a_parent),i.getAttValue(a),c);
-			}
+
+			joint_prob*=computeOFE(a,a_parent,i.getAttValue(a_parent),i.getAttValue(a),c);
+			
 		}
 		return joint_prob;
 	}
 
 	/**
-	 * Compute number of instances in the train set where the attribute i the value k, the parent
-	 * of i takes the value j and the class takes the value c 
-	 * @param i - attribute
-	 * @param j - value of parent of i
+	 * Compute number of instances in the train set where the attribute i takes the value k, the attribute i_prime
+	 * takes the value j and the class takes the value c. If i or i_prime are null, those attributes are ignored
+	 * @param i - first attribute
+	 * @param i_prime - second attribute
+	 * @param j - value of i_prime
 	 * @param k - value of i
 	 * @param c - value of the class
 	 */
-	protected int computeNijkc(Attribute i, int j, int k, int c) {
+	protected int computeNijkc(Attribute i, Attribute i_prime, int j, int k, int c) {
 		int numInstances = trainSet.getNumberOfInstances();
 		Instance inst;
 		int count = 0;
-		Attribute i_parent = directedTree.getParent(i);
+		if(i == null && i_prime == null)
+			return computeNc(c);
+		if(i == null)
+			return computeNikc(i,k,c);
+		if(i_prime == null)
+			return computeNikc(i_prime,j,c);
+			
+			
 		//TODO make dataset iterable???
 		for(int a = 0; a < numInstances; a++)
 		{
 			inst = trainSet.getInstance(a);
-			if(inst.getAttValue(i) == k)
+			if(inst.getAttValue(i) == k && inst.getAttValue(i_prime) == j && inst.getClassValue() == c)
 			{
-				if((i_parent == null && j == 0) || (i_parent != null && inst.getAttValue(i_parent) == j))
-				{
-					if(inst.getClassValue() == c)
-					{
-						count++;
-					}
-				}
+				count++;	
 			}
 		}
 		return count;
 	}
 	
+		
 	/**
-	 * Compute number of instances in the train set where the parent
-	 * of i takes the value j and the class takes the value c 
+	 * Compute number of instances in the train set where the attribute i takes the value k 
+	 * and the class takes the value c. If i is null, the attribute is ignored
 	 * @param i - attribute
 	 * @param j - value of parent of i
 	 * @param c - value of the class
 	 */
-	protected int computeNijc_K(Attribute i, int j, int c) {
+	protected int computeNikc(Attribute i, int k, int c) {
 		int numInstances = trainSet.getNumberOfInstances();
 		Instance inst;
 		int count = 0;
-		Attribute i_parent = directedTree.getParent(i);
-		//TODO make dataset iterable???
+		if(i == null)
+			return computeNikc(i,k,c);
 		for(int a = 0; a < numInstances; a++)
 		{
 			inst = trainSet.getInstance(a);
-			
-			if((i_parent == null && j == 0) || (i_parent != null && inst.getAttValue(i_parent) == j))
+			if(inst.getAttValue(i) == k && inst.getClassValue() == c)
 			{
-				if(inst.getClassValue() == c)
-				{
-					count++;
-				}
-			}
-			
-		}
-		return count;
-	}
-	
-	/**
-	 * Compute number of instances in the train set where the attribute i the value k and the class takes the value c 
-	 * @param i - attribute
-	 * @param j - value of parent of i
-	 * @param c - value of the class
-	 */
-	protected int computeNikc_J(Attribute i, int k, int c) {
-		int numInstances = trainSet.getNumberOfInstances();
-		Instance inst;
-		int count = 0;
-		//TODO make dataset iterable???
-		for(int a = 0; a < numInstances; a++)
-		{
-			inst = trainSet.getInstance(a);
-			if(inst.getAttValue(i) == k)
-			{
-				
-				if(inst.getClassValue() == c)
-				{
-					count++;
-				}
-				
+				count++;
 			}
 		}
 		return count;
@@ -195,7 +161,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	public void buildClassifier(Dataset data) {
 		trainSet = data;
 		Attribute[] atts = data.getAttributes();
-		WeightedGraph<Attribute> g = new DenseUndirectedWeightedGraph<Attribute>(atts.length);
+		AbstractUndirectedWeightedGraph<Attribute> g = new DenseUndirectedWeightedGraph<Attribute>(atts.length);
 		//add all vertices to graph
 		for(int i = 0; i < atts.length; i++)
 		{
@@ -212,9 +178,8 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 			}
 		}
 		
-		//TODO change Prim constructor???
 		//get the spanning tree from the graph
-		SpanningTreeAlgorithm<Attribute> sta = new PrimMaxSpanningTree<Attribute>((DenseUndirectedWeightedGraph<Attribute>)g); 
+		SpanningTreeAlgorithm<Attribute> sta = new PrimMaxSpanningTree<Attribute>(g); 
 		SpanningTree<Attribute> st = sta.getSpanningTree();
 		//get the directed tree from the spanning tree
 		DirectedTree<Attribute> dt = new DefaultDirectedTree<Attribute>();

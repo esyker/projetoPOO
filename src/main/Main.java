@@ -1,15 +1,19 @@
 package main;
 
+import classifier.Classifier;
+import classifier.ClassifierMetrics;
+import classifier.LLBayesianNetworkClassifier;
 import dataset.Dataset;
 import dataset.DatasetLoader;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Dataset d = DatasetLoader.loadDatasetFromCsv("C:\\Users\\Diogo\\eclipse-workspace\\projetoPOO\\src\\main\\bias-train.csv");
-		
-		System.out.println(d);
+		Dataset train = DatasetLoader.loadDatasetFromCsv("C:\\Users\\Diogo\\eclipse-workspace\\projetoPOO\\src\\main\\bias-train.csv");
+		Dataset test = DatasetLoader.loadDatasetFromCsv("C:\\Users\\Diogo\\eclipse-workspace\\projetoPOO\\src\\main\\bias-test.csv");
+		Classifier ll = new LLBayesianNetworkClassifier();
+		ClassifierMetrics metrics = new ClassifierMetrics(ll, train,test);
+		System.out.println("accuracy" + metrics.getAccuracy());
 
 	}
 
