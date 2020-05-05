@@ -99,6 +99,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 				count++;	
 			}
 		}
+		
 		return count;
 	}
 	
@@ -175,6 +176,8 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 				float weight = computeWeight(atts[i], atts[j]);
 				g.setEdgeWeight(atts[i], atts[j], weight);
 				g.setEdgeWeight(atts[j], atts[i], weight);
+				System.out.println(atts[i] + " " + atts[j] + " " + weight);
+				
 			}
 		}
 		

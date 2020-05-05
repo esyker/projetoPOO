@@ -30,7 +30,7 @@ public class MDLBayesianNetworkClassifier extends AbstractBayesianNetworkClassif
 					int Nikc_J = computeNikc(i,k,c);
 					int Nijkc = computeNijkc(i,i_prime,j,k,c);
 					if(Nijkc != 0)
-						alpha += Nijkc/N * log2((float)(Nijkc*Nc)/(Nikc_J*Nijc_K));
+						alpha += (float)Nijkc/N * log2((float)(Nijkc*Nc)/(Nikc_J*Nijc_K));
 					
 				}
 			}

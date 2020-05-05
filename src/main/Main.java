@@ -3,6 +3,7 @@ package main;
 import classifier.Classifier;
 import classifier.ClassifierMetrics;
 import classifier.LLBayesianNetworkClassifier;
+import classifier.MDLBayesianNetworkClassifier;
 import dataset.Dataset;
 import dataset.DatasetLoader;
 

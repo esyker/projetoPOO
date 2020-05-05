@@ -29,14 +29,19 @@ public class LLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifi
 				{
 					int Nikc_J = computeNikc(i,k,c);
 					int Nijkc = computeNijkc(i,i_prime,j,k,c);
+					System.out.println(Nijkc);
 					if(Nijkc != 0)
-						alpha += Nijkc/N * log2((float)(Nijkc*Nc)/(Nikc_J*Nijc_K));
+					{
+						
+						alpha += (float)Nijkc/N * log2((float)(Nijkc*Nc)/(Nikc_J*Nijc_K));
+					}
 					
 				}
 			}
 		}
 		
 		return alpha;
+		
 	}
 	
 	private float log2(float i)

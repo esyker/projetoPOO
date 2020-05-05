@@ -22,10 +22,14 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	     int max_index = -1; 
 	     
 	     for (int v = 0; v <this.numb_vertices; v++) 
+	     {
+	    	 
 	         if (mstSet[v] == false && key[v] > max) { 
 	             max = key[v]; 
 	             max_index = v; 
 	         } 
+	         
+	     }
 
 	     return max_index; 
 	 } 
