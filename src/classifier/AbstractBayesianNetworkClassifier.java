@@ -181,6 +181,8 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 			}
 		}
 		
+		System.out.println(g);
+		
 		//get the spanning tree from the graph
 		SpanningTreeAlgorithm<Attribute> sta = new PrimMaxSpanningTree<Attribute>(g); 
 		SpanningTree<Attribute> st = sta.getSpanningTree();

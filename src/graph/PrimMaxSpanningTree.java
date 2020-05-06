@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.Arrays;
+
 public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	
 	private int numb_vertices;
@@ -20,7 +22,8 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	     // Initialize max value 
 	     float max = -Float.MAX_VALUE;
 	     int max_index = -1; 
-	     
+	     System.out.println("mstSet: "+ Arrays.toString(mstSet));
+	     System.out.println("key: "+Arrays.toString(key));
 	     for (int v = 0; v <this.numb_vertices; v++) 
 	     {
 	    	 
