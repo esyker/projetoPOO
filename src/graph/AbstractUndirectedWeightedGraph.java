@@ -17,6 +17,13 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 	public AbstractUndirectedWeightedGraph(int max_numb_vertices) {
 		super();
 		this.weight_matrix=new float[max_numb_vertices][max_numb_vertices];
+		for(int i=0; i < max_numb_vertices; i++)
+		{
+			for(int j=0; j < max_numb_vertices; j++)
+			{
+				weight_matrix[i][j]=-Float.MAX_VALUE;
+			}
+		}
 		this.vertices= new LinkedList<V>();
 		this.max_numb_vertices=max_numb_vertices;
 		this.currSize=0;
@@ -107,8 +114,8 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 		int index2=this.vertices.indexOf(v2);
 		
 		if(index1!=-1 && index2!=-1) {
-			this.weight_matrix[index1][index2]=0;
-			this.weight_matrix[index2][index1]=0;
+			this.weight_matrix[index1][index2]=-Float.MAX_VALUE;
+			this.weight_matrix[index2][index1]=-Float.MAX_VALUE;
 			return true;
 		}
 		return false;

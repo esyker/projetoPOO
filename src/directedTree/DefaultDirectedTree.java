@@ -106,7 +106,7 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		
 		for (int j=0; j < size; j++)
 		{
-			if (matrix[index][j]!=0 && j!=previus)
+			if (matrix[index][j]!=-Float.MAX_VALUE && j!=previus)
 			{
 				TreeNode<V> childnode=node.addChild(s.getVertexFromIndex(j));
 				fillnode(childnode,s, j, index);	

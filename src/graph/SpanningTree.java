@@ -67,7 +67,7 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 
 		for (int j=0; j < currSize; j++)
 		{
-			if (weight_matrix[aux][j]!=0 && j!=previus)
+			if (weight_matrix[aux][j]!=-Float.MAX_VALUE && j!=previus)
 			{
 				res1=findDepth(j, aux);
 				res1++;

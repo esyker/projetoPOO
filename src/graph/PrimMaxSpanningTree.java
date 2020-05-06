@@ -79,7 +79,7 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	             // graph[u][v] is non zero only for adjacent vertices of m 
 	             // mstSet[v] is false for vertices not yet included in MST 
 	             // Update the key only if graph[u][v] is bigger than key[v] 
-	             if (g[u][v] > 0 && mstSet[v] == false && g[u][v] > key[v]) { 
+	             if (g[u][v] > -Float.MAX_VALUE && mstSet[v] == false && g[u][v] > key[v]) { 
 	                 parent[v] = u; 
 	                 key[v] = g[u][v]; 
 	             } 
