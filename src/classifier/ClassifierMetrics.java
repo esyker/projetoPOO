@@ -130,7 +130,7 @@ public class ClassifierMetrics {
 		//Test
 		Instant test_start = Instant.now();
 		this.predicted_classes=this.classifier.classify(this.testDataset);
-		this.true_classes=this.classifier.getAttributes();
+		this.true_classes=this.testDataset.getAttributes();
 		Instant test_finish = Instant.now();
 		this.timeToTest= Duration.between(test_start,test_finish).toMillis();
 		
