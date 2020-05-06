@@ -116,7 +116,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		Instance inst;
 		int count = 0;
 		if(i == null)
-			return computeNikc(i,k,c);
+			return computeNc(c);
 		for(int a = 0; a < numInstances; a++)
 		{
 			inst = trainSet.getInstance(a);

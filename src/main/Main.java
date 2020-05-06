@@ -10,8 +10,8 @@ import dataset.DatasetLoader;
 public class Main {
 
 	public static void main(String[] args) {
-		Dataset train = DatasetLoader.loadDatasetFromCsv("C:\\Users\\Diogo\\eclipse-workspace\\projetoPOO\\src\\main\\bias-train.csv");
-		Dataset test = DatasetLoader.loadDatasetFromCsv("C:\\Users\\Diogo\\eclipse-workspace\\projetoPOO\\src\\main\\bias-test.csv");
+		Dataset train = DatasetLoader.loadDatasetFromCsv("bias-train.csv");
+		Dataset test = DatasetLoader.loadDatasetFromCsv("bias-test.csv");
 		Classifier ll = new LLBayesianNetworkClassifier();
 		ClassifierMetrics metrics = new ClassifierMetrics(ll, train,test);
 		System.out.println("accuracy" + metrics.getAccuracy());
