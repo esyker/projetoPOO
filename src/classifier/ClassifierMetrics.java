@@ -10,9 +10,9 @@ public class ClassifierMetrics {
 	Classifier classifier;
 	Dataset trainDataset,testDataset;
 	
-	int[] predicted_classes;
-	int[] true_classes;
-	ArrayList<Integer> classes;
+	public int[] predicted_classes;
+	public int[] true_classes;
+	public ArrayList<Integer> classes;
 	float [] weight_classes;
 	int numb_classes;
 	int total;
@@ -116,7 +116,9 @@ public class ClassifierMetrics {
 		this.testDataset=testData;
 		this.trainDataset=trainData;
 		this.total=this.testDataset.getNumberOfInstances();
-		ArrayList<Integer> classes=new ArrayList<Integer>();
+		this.true_classes=new int[this.total];
+		this.predicted_classes=new int[this.total];
+		this.classes=new ArrayList<Integer>();
 		this.numb_classes=0;
 		
 		//Build
@@ -128,14 +130,15 @@ public class ClassifierMetrics {
 		//Test
 		Instant test_start = Instant.now();
 		this.predicted_classes=this.classifier.classify(this.testDataset);
+		this.true_classes=this.classifier.getAttributes();
 		Instant test_finish = Instant.now();
 		this.timeToTest= Duration.between(test_start,test_finish).toMillis();
 		
 		
 		//Get available classes type and number
 		for(int i=0; i<true_classes.length; i++){
-	        if(!classes.contains(true_classes[i])){
-	            classes.add(true_classes[i]);
+	        if(!this.classes.contains(true_classes[i])){
+	            this.classes.add(true_classes[i]);
 	            numb_classes++;
 	        }
 	    }
