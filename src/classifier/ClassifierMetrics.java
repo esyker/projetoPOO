@@ -4,6 +4,7 @@ import dataset.*;
 import java.time.Instant;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ClassifierMetrics {
 
@@ -42,20 +43,20 @@ public class ClassifierMetrics {
 			for(int j=0;j<this.total;j++) {
 				if(true_classes[j]!=i)//negative class
 				{
-					if(true_classes[j]==predicted_classes[j]) {
+					if(true_classes[j]==predicted_classes[j]) {//negative class predicted
 						true_negatives++;
 					}
-					else if(true_classes[j]!=predicted_classes[j]) {
-						false_negatives++;
+					else if(true_classes[j]!=predicted_classes[j]) {//positive class predicted
+						false_positives++;
 					}
 				}
 				else if(true_classes[j]==i)//positive class
 				{
-					if(true_classes[j]==predicted_classes[j]) {
+					if(true_classes[j]==predicted_classes[j]) {//positive class predicted
 						true_positives++;
 					}
-					else if(true_classes[j]!=predicted_classes[j]) {
-						false_positives++;
+					else if(true_classes[j]!=predicted_classes[j]) {//negative class predicted
+						false_negatives++;
 					}
 				}
 			}
@@ -64,7 +65,7 @@ public class ClassifierMetrics {
 			this.precision[i]= (true_positives)/(true_positives+false_positives);
 			this.f1score[i]= 2*(this.precision[i]*this.sensitivity[i])/(this.precision[i]+this.sensitivity[i]);
 			correct_classifications+=true_positives;
-			this.weight_classes[i]=(true_positives+false_positives)/this.total;
+			this.weight_classes[i]=(true_positives+false_negatives)/(float)this.total;
 			//weighted metrics
 			this.specificity[this.numb_classes]+=this.weight_classes[i]*this.specificity[i];
 			this.sensitivity[this.numb_classes]+=this.weight_classes[i]*this.sensitivity[i];
@@ -104,6 +105,24 @@ public class ClassifierMetrics {
 	public float[] getPrecision() {
 		return this.precision;
 	}
+	
+	@Override
+	public String toString() {
+		String output=new String();
+		output=	"CLASSIFIER METRICS"+"\n"+
+				"classes "+classes+"\n"+
+				"labels"+Arrays.toString(true_classes)+"\n"+
+				"predicted_classes"+Arrays.toString(predicted_classes)+"\n"+
+				"Build Time: "+timeToBuild+"ms \n"+
+				"Test Time: "+timeToTest+"ms \n"+
+				"f1score: "+Arrays.toString(f1score)+"\n"+
+				"specificity: "+Arrays.toString(specificity)+"\n"+
+				"sensitivity: "+Arrays.toString(sensitivity)+"\n"+
+				"precision: "+Arrays.toString(precision)+"\n"+
+				"class weights: "+Arrays.toString(weight_classes)+"\n"+
+				"accuracy: "+accuracy;
+		return output;
+	}
 
 	/**
 	 * 
@@ -130,10 +149,13 @@ public class ClassifierMetrics {
 		//Test
 		Instant test_start = Instant.now();
 		this.predicted_classes=this.classifier.classify(this.testDataset);
-		this.true_classes=this.testDataset.getAttributes();
 		Instant test_finish = Instant.now();
 		this.timeToTest= Duration.between(test_start,test_finish).toMillis();
 		
+		//Get true classes
+		for(int i=0;i<this.total;i++) {
+			this.true_classes[i]=this.testDataset.getInstance(i).getClassValue();
+		}
 		
 		//Get available classes type and number
 		for(int i=0; i<true_classes.length; i++){
