@@ -25,6 +25,9 @@ public class ClassifierMetrics {
 	
 	
 
+	/**
+	 * Function used by the class constructor to compute the Metrics on the test dataset
+	 */
 	void computeMetrics() {
 		int true_negatives,false_negatives,true_positives,false_positives;
 		int correct_classifications=0;
@@ -78,41 +81,63 @@ public class ClassifierMetrics {
 		return;
 	}
 	
+	/** Returns an array with the classifiers's F1score of the for each class and the weighted F1score 
+	 * @return array with the classifiers's F1score of the for each class and the weighted F1score 
+	 */
 	public float[] getF1Score() {
 		float []output=new float[numb_classes+1];
 		output=Arrays.copyOf(this.f1score,numb_classes+1);
 		return output;
 	}
 
+	/**Returns the classifier's Accuracy
+	 * @return classifier's Accuracy
+	 */
 	public double getAccuracy() {
 		return this.accuracy;
 	}
 
+	/**Returns the classifier's Time to Build
+	 * @return classifier's Time to Build
+	 */
 	public long getTimeToBuild() {
 		return this.timeToBuild;
 	}
-
+	
+	/**Returns the classifier's Time to Test
+	 * @return classifier's Time to Test
+	 */
 	public long getTimeToTest() {
 		return this.timeToTest;
 	}
 
+	/**Returns an array with the classfier's Specifity for each class and the weighted Specifity
+	 * @return array with the classfier's Specifity for each class and the weighted Specifity
+	 */
 	public float[] getSpecifity() {
 		float []output=new float[numb_classes+1];
 		output=Arrays.copyOf(this.specificity,numb_classes+1);
 		return output;
 	}
-
+	
+	/**Returns an array with the classfier's Sensitivity for each class and the weighted Sensitivity
+	 * @return array with the classfier's Sensitivity for each class and the weighted Sensitivity
+	 */
 	public float[] getSensitivity() {
 		float []output=new float[numb_classes+1];
 		output=Arrays.copyOf(this.sensitivity,numb_classes+1);
 		return output;
 	}
 	
+	/**Returns an array with the classfier's Precision for each class and the weighted Precision
+	 * @return array with the classfier's Precision for each class and the weighted Precision
+	 */
 	public float[] getPrecision() {
 		float []output=new float[numb_classes+1];
 		output=Arrays.copyOf(this.precision,numb_classes+1);
 		return output;
 	}
+	
 	
 	@Override
 	public String toString() {
@@ -138,10 +163,10 @@ public class ClassifierMetrics {
 	}
 
 	/**
-	 * 
-	 * @param c
-	 * @param trainData
-	 * @param testData
+	 * 	Function used to train the classifier and test it and get appropriate measures of performance
+	 * @param c Classifier used
+	 * @param trainData Dataset used to train
+	 * @param testData Dataset used to test and get the metrics
 	 */
 	public ClassifierMetrics(Classifier c, Dataset trainData, Dataset testData) {
 		this.classifier=c;
