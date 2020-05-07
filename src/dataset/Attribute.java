@@ -2,13 +2,11 @@ package dataset;
 
 public class Attribute {
 
-	
-
 	protected String label;
 
 	/**
-	 * 
-	 * @param label - attribute label (name)
+	 * Create an attribute Object
+	 * @param label attribute label (name)
 	 */
 	public Attribute(String label) {
 		this.label = label;

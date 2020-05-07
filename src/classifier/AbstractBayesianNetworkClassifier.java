@@ -16,23 +16,24 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	protected DirectedTree<Attribute> directedTree;
 	protected final float N_prime = (float) 0.5;
 
-	public AbstractBayesianNetworkClassifier() {
-		
-	}
-
+	
 	/**
-	 * Compute the weight between two attributes
-	 * @param i - first attribute
-	 * @param j - second attribute
+	 * Computes the weight between two attributes
+	 * @param i first attribute
+	 * @param j second attribute
+	 * @return weight
 	 */
 	protected abstract float computeWeight(Attribute i, Attribute j);
 
 	/**
-	 * 
-	 * @param i
-	 * @param j
-	 * @param k
-	 * @param c
+	 * Computes the observed frequency estimates (theta_ijkc) for attribute i, whose parent is i_parent,
+	 * where i takes the value k, i_parent takes the value j and the class takes the value c
+	 * @param i attribute
+	 * @param i_parent parent of i
+	 * @param j value of i_parent
+	 * @param k value of i
+	 * @param c value of the class
+	 * @return the OFE value
 	 */
 	protected float computeOFE(Attribute i, Attribute i_parent, int j, int k, int c) {
 		int r_i = trainSet.getMaxAttributeValue(i) + 1;
@@ -41,8 +42,10 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	}
 
 	/**
-	 * 
-	 * @param c
+	 * Computes the observed frequency estimates for the class (theta_c) where
+	 * the class takes the value c
+	 * @param c value of the class
+	 * @return the class OFE value
 	 */
 	protected float computeClassOFE(int c) {
 		int s = trainSet.getMaxClassValue() + 1;
@@ -52,9 +55,11 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	}
 
 	/**
-	 * 
-	 * @param i
-	 * @param c
+	 * Computes the joint probability distribution of a given instance i, for 
+	 * a class value of c
+	 * @param i instance
+	 * @param c value of the class
+	 * @return the class OFE value
 	 */
 	protected float computeJointProbabilityD(Instance i, int c) {
 		float joint_prob = computeClassOFE(c);
@@ -72,11 +77,12 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	/**
 	 * Compute number of instances in the train set where the attribute i takes the value k, the attribute i_prime
 	 * takes the value j and the class takes the value c. If i or i_prime are null, those attributes are ignored
-	 * @param i - first attribute
-	 * @param i_prime - second attribute
-	 * @param j - value of i_prime
-	 * @param k - value of i
-	 * @param c - value of the class
+	 * @param i first attribute
+	 * @param i_prime second attribute
+	 * @param j value of i_prime
+	 * @param k value of i
+	 * @param c value of the class
+	 * @return count of Nijkc
 	 */
 	protected int computeNijkc(Attribute i, Attribute i_prime, int j, int k, int c) {
 		int numInstances = trainSet.getNumberOfInstances();
@@ -107,9 +113,10 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	/**
 	 * Compute number of instances in the train set where the attribute i takes the value k 
 	 * and the class takes the value c. If i is null, the attribute is ignored
-	 * @param i - attribute
-	 * @param j - value of parent of i
-	 * @param c - value of the class
+	 * @param i attribute
+	 * @param k value of i
+	 * @param c value of the class
+	 * @return count of Nikc
 	 */
 	protected int computeNikc(Attribute i, int k, int c) {
 		int numInstances = trainSet.getNumberOfInstances();
@@ -130,7 +137,8 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	
 	/**
 	 * Compute number of instances in the train set where the class takes the value c 
-	 * @param c - value of the class
+	 * @param c value of the class
+	 * @return count of Nc
 	 */
 	protected int computeNc(int c) {
 		int numInstances = trainSet.getNumberOfInstances();
@@ -150,6 +158,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		return count;
 	}
 	
+	
 	/**
 	 * Compute number of instances in the train set
 	 */
@@ -158,6 +167,9 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	}
 	
 	
+	/**Build the classifier from the given training dataset
+	 * @param data training dataset
+	 */
 	@Override
 	public void buildClassifier(Dataset data) {
 		trainSet = data;
@@ -191,12 +203,14 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		dt.loadFromSpanningTree(st);
 		
 		
-		directedTree = dt;
-		
-		
-		
+		directedTree = dt;	
 	}
 
+	
+	/**Classify an instance with the classifier
+	 * @param i instance to classify
+	 * @return classification 
+	 */
 	@Override
 	public int classify(Instance i) {
 		int class_max = 0;
@@ -213,6 +227,10 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		return class_max;
 	}
 	
+	/**Classify a whole test dataset with the classifier
+	 * @param d dataset to classify
+	 * @return array with classifications of each instance of the dataset 
+	 */
 	@Override
 	public int[] classify(Dataset d) {
 		int num_instances = d.getNumberOfInstances();
@@ -221,8 +239,10 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		{
 			Instance inst = d.getInstance(i);
 			classification[i] = classify(inst);
+			System.out.println("real: "+inst.getClassValue()+" predict: " + classification[i]);
 		}
 		return classification;
+		
 	}
 
 }

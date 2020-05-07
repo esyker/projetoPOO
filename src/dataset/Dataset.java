@@ -3,17 +3,19 @@ package dataset;
 public interface Dataset {
 
 	/**
-	 * Add an instance to the dataset is the instance has the same attributes as the dataset
-	 * @param i - instance to add
+	 * Adds an instance to the dataset if the instance has the same attributes as the dataset
+	 * The instance cannot be changed once it enters the Dataset, only removed
+	 * @param i instance to add
 	 * @return true if successful, false if unsuccessful
 	 */
 	boolean add(Instance i);
 
 	/**
-	 * remove an instance from the dataset
+	 * Removes an instance from the dataset
 	 * @param i - instance to remove
+	 * @return true if successful, false if unsuccessful
 	 */
-	void remove(Instance i);
+	boolean remove(Instance i);
 
 	/**
 	 * return an instance in the dataset
