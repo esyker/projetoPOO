@@ -11,9 +11,9 @@ public class ClassifierMetrics {
 	Classifier classifier;
 	Dataset trainDataset,testDataset;
 	
-	public int[] predicted_classes;
-	public int[] true_classes;
-	public ArrayList<Integer> classes;
+	int[] predicted_classes;
+	int[] true_classes;
+	ArrayList<Integer> classes;
 	float [] weight_classes;
 	int numb_classes;
 	int total;
@@ -79,7 +79,9 @@ public class ClassifierMetrics {
 	}
 	
 	public float[] getF1Score() {
-		return this.f1score;
+		float []output=new float[numb_classes+1];
+		output=Arrays.copyOf(this.f1score,numb_classes+1);
+		return output;
 	}
 
 	public double getAccuracy() {
@@ -95,15 +97,21 @@ public class ClassifierMetrics {
 	}
 
 	public float[] getSpecifity() {
-		return this.specificity;
+		float []output=new float[numb_classes+1];
+		output=Arrays.copyOf(this.specificity,numb_classes+1);
+		return output;
 	}
 
 	public float[] getSensitivity() {
-		return this.sensitivity;
+		float []output=new float[numb_classes+1];
+		output=Arrays.copyOf(this.sensitivity,numb_classes+1);
+		return output;
 	}
 	
 	public float[] getPrecision() {
-		return this.precision;
+		float []output=new float[numb_classes+1];
+		output=Arrays.copyOf(this.precision,numb_classes+1);
+		return output;
 	}
 	
 	@Override
