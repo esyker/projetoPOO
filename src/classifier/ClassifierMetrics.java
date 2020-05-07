@@ -54,6 +54,7 @@ public class ClassifierMetrics {
 				{
 					if(true_classes[j]==predicted_classes[j]) {//positive class predicted
 						true_positives++;
+						correct_classifications++;
 					}
 					else if(true_classes[j]!=predicted_classes[j]) {//negative class predicted
 						false_negatives++;
@@ -63,8 +64,7 @@ public class ClassifierMetrics {
 			this.specificity[i]=(true_negatives)/(true_negatives+false_positives);
 			this.sensitivity[i]= (true_positives)/(true_positives+false_negatives);
 			this.precision[i]= (true_positives)/(true_positives+false_positives);
-			this.f1score[i]= 2*(this.precision[i]*this.sensitivity[i])/(this.precision[i]+this.sensitivity[i]);
-			correct_classifications+=true_positives;
+			this.f1score[i]= 2*true_positives/(2*true_positives+false_negatives+false_positives);
 			this.weight_classes[i]=(true_positives+false_negatives)/(float)this.total;
 			//weighted metrics
 			this.specificity[this.numb_classes]+=this.weight_classes[i]*this.specificity[i];
@@ -117,19 +117,24 @@ public class ClassifierMetrics {
 	@Override
 	public String toString() {
 		String output=new String();
-		output=	"CLASSIFIER METRICS"+"\n"+
-				"classes "+classes+"\n"+
-				"labels"+Arrays.toString(true_classes)+"\n"+
-				"predicted_classes"+Arrays.toString(predicted_classes)+"\n"+
-				"Build Time: "+timeToBuild+"ms \n"+
-				"Test Time: "+timeToTest+"ms \n"+
-				"f1score: "+Arrays.toString(f1score)+"\n"+
-				"specificity: "+Arrays.toString(specificity)+"\n"+
-				"sensitivity: "+Arrays.toString(sensitivity)+"\n"+
-				"precision: "+Arrays.toString(precision)+"\n"+
-				"class weights: "+Arrays.toString(weight_classes)+"\n"+
-				"accuracy: "+accuracy;
+		output=	"Classfier:\n"+classifier+"\n"+
+				"Time to Build:\t"+timeToBuild+" ms\n"+
+				"Testing the classifier:\t"+"\n";
+		
+		for(int i=0;i<this.total;i++) {
+			output+="->instance "+(i+1)+":\t"+predicted_classes[i]+"\n";
+		}
+		
+		output+="Time to test:\t"+timeToTest+" ms\n"+
+				"Resume:\t"+
+				accuracy+" "+
+				Arrays.toString(specificity)+" "+
+				Arrays.toString(sensitivity)+" "+
+				Arrays.toString(f1score);
 		return output;
+		//"classes "+classes+"\n"+
+		//"labels"+Arrays.toString(true_classes)+"\n"+
+		//"predicted_classes"+Arrays.toString(predicted_classes)+"\n"+
 	}
 
 	/**
