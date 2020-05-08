@@ -16,7 +16,7 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 
 		int index1=this.vertices.indexOf(v1);
 		int index2=this.vertices.indexOf(v2);
-		float temp=this.weight_matrix[index1][index2];
+		double temp=this.weight_matrix[index1][index2];
 		
 		if(index1!=-1 && index2!=-1&&index1!=index2) {//vertices exist
 			this.weight_matrix[index1][index2]=1;
@@ -34,11 +34,11 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 	}
     
 	@Override
-	public boolean setEdgeWeight(V v1, V v2, float weight) {
+	public boolean setEdgeWeight(V v1, V v2, double weight) {
 
 		int index1=this.vertices.indexOf(v1);
 		int index2=this.vertices.indexOf(v2);
-		float temp=this.weight_matrix[index1][index2];
+		double temp=this.weight_matrix[index1][index2];
 		
 		if(index1!=-1 && index2!=-1&&index1!=index2) {//vertices exist
 			this.weight_matrix[index1][index2]=weight;
@@ -59,7 +59,7 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 
 	
 	
-    private int findDepth(int i, int previus) {
+    private int findDepth(int i, int previous) {
     	int aux =i;
 		int res=0;
 		int res1=0;
@@ -67,7 +67,7 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 
 		for (int j=0; j < currSize; j++)
 		{
-			if (weight_matrix[aux][j]!=-Float.MAX_VALUE && j!=previus)
+			if (weight_matrix[aux][j]!=-Double.MAX_VALUE && j!=previous)
 			{
 				res1=findDepth(j, aux);
 				res1++;

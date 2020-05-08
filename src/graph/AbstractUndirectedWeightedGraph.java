@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGraph<V> {
 
-	protected float[][] weight_matrix;
+	protected double[][] weight_matrix;
 	protected List<V> vertices;
 	
 	protected int currSize;
@@ -16,12 +16,12 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 	
 	public AbstractUndirectedWeightedGraph(int max_numb_vertices) {
 		super();
-		this.weight_matrix=new float[max_numb_vertices][max_numb_vertices];
+		this.weight_matrix=new double[max_numb_vertices][max_numb_vertices];
 		for(int i=0; i < max_numb_vertices; i++)
 		{
 			for(int j=0; j < max_numb_vertices; j++)
 			{
-				weight_matrix[i][j]=-Float.MAX_VALUE;
+				weight_matrix[i][j]=-Double.MAX_VALUE;
 			}
 		}
 		this.vertices= new LinkedList<V>();
@@ -114,8 +114,8 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 		int index2=this.vertices.indexOf(v2);
 		
 		if(index1!=-1 && index2!=-1) {
-			this.weight_matrix[index1][index2]=-Float.MAX_VALUE;
-			this.weight_matrix[index2][index1]=-Float.MAX_VALUE;
+			this.weight_matrix[index1][index2]=-Double.MAX_VALUE;
+			this.weight_matrix[index2][index1]=-Double.MAX_VALUE;
 			return true;
 		}
 		return false;
@@ -130,7 +130,7 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 	}
 
 	@Override
-	public float getEdgeWeight(V v1, V v2) {
+	public double getEdgeWeight(V v1, V v2) {
 		
 		int index1=this.vertices.indexOf(v1);
 		int index2=this.vertices.indexOf(v2);
@@ -165,9 +165,9 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 		return this.currSize;
 	}
 	
-	public float [][] getWeightsMatrix(){
+	public double [][] getWeightsMatrix(){
 		
-		float[][] copy = new float[currSize][currSize];
+		double[][] copy = new double[currSize][currSize];
 		for(int i=0; i<currSize; i++)
 			  for(int j=0; j<currSize; j++)
 				  copy[i][j]=weight_matrix[i][j];

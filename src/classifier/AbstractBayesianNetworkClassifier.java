@@ -14,7 +14,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 
 	protected Dataset trainSet;
 	protected DirectedTree<Attribute> directedTree;
-	protected final float N_prime = (float) 0.5;
+	protected final double N_prime = (double) 0.5;
 
 	
 	/**
@@ -23,7 +23,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	 * @param j second attribute
 	 * @return weight
 	 */
-	protected abstract float computeWeight(Attribute i, Attribute j);
+	protected abstract double computeWeight(Attribute i, Attribute j);
 
 	/**
 	 * Computes the observed frequency estimates (theta_ijkc) for attribute i, whose parent is i_parent,
@@ -35,9 +35,9 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	 * @param c value of the class
 	 * @return the OFE value
 	 */
-	protected float computeOFE(Attribute i, Attribute i_parent, int j, int k, int c) {
+	protected double computeOFE(Attribute i, Attribute i_parent, int j, int k, int c) {
 		int r_i = trainSet.getMaxAttributeValue(i) + 1;
-		float OFE = (computeNijkc(i,i_parent,j,k,c)+N_prime)/(computeNikc(i_parent,j,c) + r_i * N_prime);
+		double OFE = (computeNijkc(i,i_parent,j,k,c)+N_prime)/(computeNikc(i_parent,j,c) + r_i * N_prime);
 		return OFE;
 	}
 
@@ -47,10 +47,10 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	 * @param c value of the class
 	 * @return the class OFE value
 	 */
-	protected float computeClassOFE(int c) {
+	protected double computeClassOFE(int c) {
 		int s = trainSet.getMaxClassValue() + 1;
 		
-		float class_OFE = (computeNc(c) + N_prime)/(computeN()+s*N_prime);
+		double class_OFE = (computeNc(c) + N_prime)/(computeN()+s*N_prime);
 		return class_OFE;
 	}
 
@@ -61,8 +61,8 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	 * @param c value of the class
 	 * @return the class OFE value
 	 */
-	protected float computeJointProbabilityD(Instance i, int c) {
-		float joint_prob = computeClassOFE(c);
+	protected double computeJointProbabilityD(Instance i, int c) {
+		double joint_prob = computeClassOFE(c);
 		Attribute[] atts = trainSet.getAttributes();
 		for(Attribute a:atts)
 		{
@@ -174,7 +174,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		{
 			for(int j = i+1; j < atts.length; j++)
 			{
-				float weight = computeWeight(atts[i], atts[j]);
+				double weight = computeWeight(atts[i], atts[j]);
 				g.setEdgeWeight(atts[i], atts[j], weight);
 				g.setEdgeWeight(atts[j], atts[i], weight);
 				
@@ -201,10 +201,10 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	@Override
 	public int classify(Instance i) {
 		int class_max = 0;
-		float maximum_prob = 0;
+		double maximum_prob = 0;
 		for(int j = 0; j <= trainSet.getMaxClassValue(); j++)
 		{
-			float prob = computeJointProbabilityD(i,j);
+			double prob = computeJointProbabilityD(i,j);
 			if(prob > maximum_prob)
 			{
 				maximum_prob = prob;

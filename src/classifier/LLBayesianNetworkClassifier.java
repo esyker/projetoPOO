@@ -19,8 +19,8 @@ public class LLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifi
 	 * @return weight
 	 */
 	@Override
-	protected float computeWeight(Attribute i, Attribute i_prime) {
-		float alpha = 0;
+	protected double computeWeight(Attribute i, Attribute i_prime) {
+		double alpha = 0;
 		int q_i = trainSet.getMaxAttributeValue(i_prime) + 1;
 		int r_i = trainSet.getMaxAttributeValue(i) + 1;
 		int s = trainSet.getMaxClassValue() + 1;
@@ -36,7 +36,7 @@ public class LLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifi
 					int Nikc_J = computeNikc(i,k,c);
 					int Nijkc = computeNijkc(i,i_prime,j,k,c);
 					if(Nijkc != 0)
-						alpha += (float)Nijkc/N * log2((float)(Nijkc*Nc)/(Nikc_J*Nijc_K));
+						alpha += (double)Nijkc/N * log2((double)(Nijkc*Nc)/(Nikc_J*Nijc_K));
 					
 				}
 			}
@@ -46,9 +46,9 @@ public class LLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifi
 		
 	}
 	
-	private float log2(float i)
+	private double log2(double i)
 	{
-		return (float) (Math.log(i)/Math.log(2));
+		return (Math.log(i)/Math.log(2));
 	}
 	
 	

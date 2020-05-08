@@ -22,7 +22,7 @@ public interface WeightedGraph<V> {
 	 * @param v2
 	 * @param weight
 	 */
-	boolean setEdgeWeight(V v1, V v2, float weight);
+	boolean setEdgeWeight(V v1, V v2, double weight);
 
 	/**
 	 * 
@@ -44,7 +44,7 @@ public interface WeightedGraph<V> {
 	 * @param v1
 	 * @param v2
 	 */
-	float getEdgeWeight(V v1, V v2);
+	double getEdgeWeight(V v1, V v2);
 	
 	boolean isGraphCyclic();
 	

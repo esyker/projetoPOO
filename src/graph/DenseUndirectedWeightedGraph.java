@@ -27,7 +27,7 @@ public class DenseUndirectedWeightedGraph<V> extends AbstractUndirectedWeightedG
 	
 	
 	@Override
-	public boolean setEdgeWeight(V v1, V v2, float weight) {
+	public boolean setEdgeWeight(V v1, V v2, double weight) {
 
 		int index1=this.vertices.indexOf(v1);
 		int index2=this.vertices.indexOf(v2);

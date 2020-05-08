@@ -17,10 +17,10 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	
 	 // A utility function to find the vertex with minimum key 
 	 // value, from the set of vertices not yet included in MST 
-	 int maxKey(float key[], Boolean mstSet[]) 
+	 int maxKey(double key[], Boolean mstSet[]) 
 	 { 
 	     // Initialize max value 
-	     float max = -Float.MAX_VALUE;
+	     double max = -Double.MAX_VALUE;
 	     int max_index = -1; 
 	     for (int v = 0; v <this.numb_vertices; v++) 
 	     {
@@ -38,19 +38,19 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	@Override
 	public SpanningTree<V> getSpanningTree() {
 		
-		 float [][] g=graph.getWeightsMatrix();
+		 double [][] g=graph.getWeightsMatrix();
 	     // Array to store constructed MST 
 	     int parent[] = new int[graph.getNumbVertices()]; 
 
 	     // Key values used to pick minimum weight edge in cut 
-	     float key[] = new float[graph.getNumbVertices()]; 
+	     double key[] = new double[graph.getNumbVertices()]; 
 
 	     // To represent set of vertices not yet included in MST 
 	     Boolean mstSet[] = new Boolean[graph.getNumbVertices()]; 
 
 	     // Initialize all keys as -INFINITE 
 	     for (int i = 0; i < graph.getNumbVertices(); i++) { 
-	         key[i] = -Float.MAX_VALUE; 
+	         key[i] = -Double.MAX_VALUE; 
 	         mstSet[i] = false; 
 	     } 
 
@@ -76,7 +76,7 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	             // graph[u][v] is non zero only for adjacent vertices of m 
 	             // mstSet[v] is false for vertices not yet included in MST 
 	             // Update the key only if graph[u][v] is bigger than key[v] 
-	             if (g[u][v] > -Float.MAX_VALUE && mstSet[v] == false && g[u][v] > key[v]) { 
+	             if (g[u][v] > -Double.MAX_VALUE && mstSet[v] == false && g[u][v] > key[v]) { 
 	                 parent[v] = u; 
 	                 key[v] = g[u][v]; 
 	             } 

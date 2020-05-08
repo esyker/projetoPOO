@@ -102,11 +102,11 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 	private void fillnode(TreeNode<V> node, SpanningTree<V> s, int index, int previous) {
 			
 		int size=s.getNumbVertices();
-		float[][] matrix=s.getWeightsMatrix();
+		double[][] matrix=s.getWeightsMatrix();
 		
 		for (int j=0; j < size; j++)
 		{
-			if (matrix[index][j]!=-Float.MAX_VALUE && j!=previous)
+			if (matrix[index][j]!=-Double.MAX_VALUE && j!=previous)
 			{
 				TreeNode<V> childnode=node.addChild(s.getVertexFromIndex(j));
 				fillnode(childnode,s, j, index);	

@@ -14,14 +14,14 @@ public class ClassifierMetrics {
 	int[] predicted_classes;
 	int[] true_classes;
 	ArrayList<Integer> classes;
-	float [] weight_classes;
+	double [] weight_classes;
 	int numb_classes;
 	int total;
 	
 	long timeToBuild;
 	long timeToTest; 
-	float accuracy;
-	float[] f1score,specificity,sensitivity,precision; 
+	double accuracy;
+	double[] f1score,specificity,sensitivity,precision; 
 	
 	
 
@@ -68,7 +68,7 @@ public class ClassifierMetrics {
 			this.sensitivity[i]= (true_positives)/(true_positives+false_negatives);
 			this.precision[i]= (true_positives)/(true_positives+false_positives);
 			this.f1score[i]= 2*true_positives/(2*true_positives+false_negatives+false_positives);
-			this.weight_classes[i]=(true_positives+false_negatives)/(float)this.total;
+			this.weight_classes[i]=(true_positives+false_negatives)/(double)this.total;
 			//weighted metrics
 			this.specificity[this.numb_classes]+=this.weight_classes[i]*this.specificity[i];
 			this.sensitivity[this.numb_classes]+=this.weight_classes[i]*this.sensitivity[i];
@@ -84,8 +84,8 @@ public class ClassifierMetrics {
 	/** Returns an array with the classifiers's F1score of the for each class and the weighted F1score 
 	 * @return array with the classifiers's F1score of the for each class and the weighted F1score 
 	 */
-	public float[] getF1Score() {
-		float []output=new float[numb_classes+1];
+	public double[] getF1Score() {
+		double []output=new double[numb_classes+1];
 		output=Arrays.copyOf(this.f1score,numb_classes+1);
 		return output;
 	}
@@ -114,8 +114,8 @@ public class ClassifierMetrics {
 	/**Returns an array with the classfier's Specifity for each class and the weighted Specifity
 	 * @return array with the classfier's Specifity for each class and the weighted Specifity
 	 */
-	public float[] getSpecifity() {
-		float []output=new float[numb_classes+1];
+	public double[] getSpecifity() {
+		double []output=new double[numb_classes+1];
 		output=Arrays.copyOf(this.specificity,numb_classes+1);
 		return output;
 	}
@@ -123,8 +123,8 @@ public class ClassifierMetrics {
 	/**Returns an array with the classfier's Sensitivity for each class and the weighted Sensitivity
 	 * @return array with the classfier's Sensitivity for each class and the weighted Sensitivity
 	 */
-	public float[] getSensitivity() {
-		float []output=new float[numb_classes+1];
+	public double[] getSensitivity() {
+		double []output=new double[numb_classes+1];
 		output=Arrays.copyOf(this.sensitivity,numb_classes+1);
 		return output;
 	}
@@ -132,8 +132,8 @@ public class ClassifierMetrics {
 	/**Returns an array with the classfier's Precision for each class and the weighted Precision
 	 * @return array with the classfier's Precision for each class and the weighted Precision
 	 */
-	public float[] getPrecision() {
-		float []output=new float[numb_classes+1];
+	public double[] getPrecision() {
+		double []output=new double[numb_classes+1];
 		output=Arrays.copyOf(this.precision,numb_classes+1);
 		return output;
 	}
@@ -203,11 +203,11 @@ public class ClassifierMetrics {
 	        }
 	    }
 		
-		this.f1score=new float[numb_classes+1];
-		this.specificity=new float[numb_classes+1];
-		this.sensitivity=new float[numb_classes+1];
-		this.precision=new float[numb_classes+1];
-		this.weight_classes=new float[numb_classes];
+		this.f1score=new double[numb_classes+1];
+		this.specificity=new double[numb_classes+1];
+		this.sensitivity=new double[numb_classes+1];
+		this.precision=new double[numb_classes+1];
+		this.weight_classes=new double[numb_classes];
 		
 		computeMetrics();
 		
