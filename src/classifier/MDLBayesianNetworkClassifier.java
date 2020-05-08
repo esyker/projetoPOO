@@ -13,7 +13,7 @@ public class MDLBayesianNetworkClassifier extends AbstractBayesianNetworkClassif
 	}
 
 	/**
-	 * Computes the weight between two attributes
+	 * Computes the MDL weight between two attributes
 	 * @param i first attribute
 	 * @param i_prime second attribute
 	 * @return weight

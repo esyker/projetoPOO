@@ -38,7 +38,9 @@ public abstract class DatasetLoader {
             	Instance inst = new DefaultInstance();
             	for(int i = 0; i < values.length - 1; i++)
             	{
-            		inst.setAttValue(d.getAttributes()[i], Integer.parseInt(values[i]));
+            		
+        			inst.setAttValue(d.getAttributes()[i], Integer.parseInt(values[i]));
+    		
             		
             	}
             	inst.setClassValue(Integer.parseInt(values[values.length-1]));
@@ -47,8 +49,13 @@ public abstract class DatasetLoader {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+        	
+            return null;
         }
+        catch(NumberFormatException e) { //in case there is an error in the file
+			return null;
+		}
+        
         return d;
 	}
 

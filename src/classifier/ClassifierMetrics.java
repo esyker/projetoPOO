@@ -152,9 +152,9 @@ public class ClassifierMetrics {
 		
 		output+="Time to test:\t"+timeToTest+" ms\n"+
 				"Resume:\t"+
-				accuracy+" "+
-				Arrays.toString(specificity)+" "+
-				Arrays.toString(sensitivity)+" "+
+				accuracy+","+
+				Arrays.toString(specificity)+","+
+				Arrays.toString(sensitivity)+","+
 				Arrays.toString(f1score);
 		return output;
 		//"classes "+classes+"\n"+

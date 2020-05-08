@@ -13,7 +13,7 @@ public class LLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifi
 	}
 	
 	/**
-	 * Computes the weight between two attributes
+	 * Computes the LL weight between two attributes
 	 * @param i first attribute
 	 * @param i_prime second attribute
 	 * @return weight

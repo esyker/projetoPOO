@@ -85,8 +85,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	 * @return count of Nijkc
 	 */
 	protected int computeNijkc(Attribute i, Attribute i_prime, int j, int k, int c) {
-		int numInstances = trainSet.getNumberOfInstances();
-		Instance inst;
+	
 		int count = 0;
 		if(i == null && i_prime == null)
 			return computeNc(c);
@@ -95,11 +94,8 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		if(i_prime == null)
 			return computeNikc(i_prime,j,c);
 			
-			
-		//TODO make dataset iterable???
-		for(int a = 0; a < numInstances; a++)
+		for(Instance inst:trainSet)
 		{
-			inst = trainSet.getInstance(a);
 			if(inst.getAttValue(i) == k && inst.getAttValue(i_prime) == j && inst.getClassValue() == c)
 			{
 				count++;	
@@ -119,14 +115,11 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	 * @return count of Nikc
 	 */
 	protected int computeNikc(Attribute i, int k, int c) {
-		int numInstances = trainSet.getNumberOfInstances();
-		Instance inst;
 		int count = 0;
 		if(i == null)
 			return computeNc(c);
-		for(int a = 0; a < numInstances; a++)
+		for(Instance inst:trainSet)
 		{
-			inst = trainSet.getInstance(a);
 			if(inst.getAttValue(i) == k && inst.getClassValue() == c)
 			{
 				count++;
@@ -141,14 +134,10 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	 * @return count of Nc
 	 */
 	protected int computeNc(int c) {
-		int numInstances = trainSet.getNumberOfInstances();
-		Instance inst;
 		int count = 0;
-		//TODO make dataset iterable???
-		for(int a = 0; a < numInstances; a++)
+		
+		for(Instance inst:trainSet)
 		{
-			inst = trainSet.getInstance(a);
-			
 			if(inst.getClassValue() == c)
 			{
 				count++;
@@ -188,12 +177,10 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 				float weight = computeWeight(atts[i], atts[j]);
 				g.setEdgeWeight(atts[i], atts[j], weight);
 				g.setEdgeWeight(atts[j], atts[i], weight);
-				System.out.println(atts[i] + " " + atts[j] + " " + weight);
 				
 			}
 		}
 		
-		System.out.println(g);
 		
 		//get the spanning tree from the graph
 		SpanningTreeAlgorithm<Attribute> sta = new PrimMaxSpanningTree<Attribute>(g); 
@@ -233,16 +220,20 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	 */
 	@Override
 	public int[] classify(Dataset d) {
-		int num_instances = d.getNumberOfInstances();
 		int[] classification = new int[d.getNumberOfInstances()];
-		for(int i = 0; i < num_instances; i++)
+		int i = 0;
+		for(Instance inst:d)
 		{
-			Instance inst = d.getInstance(i);
 			classification[i] = classify(inst);
-			System.out.println("real: "+inst.getClassValue()+" predict: " + classification[i]);
+			i++;
 		}
 		return classification;
 		
+	}
+
+	@Override
+	public String toString() {
+		return directedTree.toString();
 	}
 
 }

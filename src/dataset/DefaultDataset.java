@@ -10,31 +10,52 @@ public class DefaultDataset implements Dataset {
 
 	public DefaultDataset(Attribute[] attributes) {
 		instacesList = new LinkedList<Instance>();
-		this.attributes = attributes;
+		//save a copy of the array of attributes, so it can't be changed outside this class
+		this.attributes = Arrays.copyOf(attributes, attributes.length); 
 	}
 
-
-
+	/**
+	 * Adds an instance to the dataset if the instance has the same attributes as the dataset
+	 * @param i instance to add
+	 * @return true if successful, false if unsuccessful
+	 */
 	@Override
 	public boolean add(Instance i) {
-		if(i.hasAttributes(this.attributes)) //the instance has all the attributes the dataset has
-			return instacesList.add(i);  //TODO: CLONE????
+		if(i.hasAttributes(this.attributes)) //check if the instance has all the attributes the dataset has
+			return instacesList.add(i);
 		else
 			return false;
 		
 	}
 
+	/**
+	 * Removes an instance from the dataset
+	 * @param i - instance to remove
+	 * @return true if successful, false if unsuccessful
+	 */
 	@Override
-	public void remove(Instance i) {
-		instacesList.remove(i);   
+	public boolean remove(Instance i) {
+		return instacesList.remove(i);   
 		
 	}
 
+	/**
+	 * Returns an instance belonging to the dataset, in position index
+	 * @param index position of the instance
+	 * @return Instance at position index, or null if it doesn't exist
+	 */
 	@Override
 	public Instance getInstance(int index) {
-		return instacesList.get(index);   //TODO: CLONE????
+		if(index < getNumberOfInstances())
+			return instacesList.get(index);  
+		else
+			return null;
 	}
 
+	/**
+	 * Return the maximum value that the class takes in all the instances
+	 * @return the maximum value the class takes
+	 */
 	@Override
 	public int getMaxClassValue() {
 		
@@ -47,6 +68,11 @@ public class DefaultDataset implements Dataset {
 		return max_value;
 	}
 
+	/**
+	 * Return the maximum value an attribute takes in all the instances
+	 * @param a - attribute
+	 * @return maximum attribute value, or -1 in case of error
+	 */
 	@Override
 	public int getMaxAttributeValue(Attribute a) {
 		int max_value = -1;
@@ -58,12 +84,19 @@ public class DefaultDataset implements Dataset {
 		return max_value;
 	}
 	
+	/**
+	 * Get an array with all the attributes of the dataset
+	 * @return array with all of the attributes of the dataset
+	 */
 	@Override
 	public Attribute[] getAttributes() {
-		return attributes;
+		return Arrays.copyOf(attributes, attributes.length); //return a copy so it can't be changed outside this class
 	}
 	
-	
+	/**
+	 * Get the number of instances in the dataset
+	 * @return number of instances
+	 */
 	@Override
 	public int getNumberOfInstances() {
 		return instacesList.size();
@@ -72,15 +105,17 @@ public class DefaultDataset implements Dataset {
 	@Override
 	public String toString() {
 		Attribute[] atts = getAttributes();
-		String s = "";
+		String s = "\t\t";
 		for(Attribute a:atts)
 		{
 			s+= a.toString() + "\t";
 		}
 		s += "\tClass\n";
-		for(int i = 0; i < getNumberOfInstances(); i++)
+		int i = 1;
+		for(Instance inst:this)
 		{
-			Instance inst = getInstance(i);
+			s+="Instance" + i + ":\t";
+			i++;
 			for(Attribute a:atts)
 			{
 				s += inst.getAttValue(a) + "\t";
@@ -89,6 +124,13 @@ public class DefaultDataset implements Dataset {
 		}
 		return s;
 	}
+
+
+	@Override
+	public Iterator<Instance> iterator() {
+		return new DatasetIterator(this);
+	}
+
 
 
 }

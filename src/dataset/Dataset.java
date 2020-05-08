@@ -1,10 +1,10 @@
 package dataset;
 
-public interface Dataset {
+
+public interface Dataset extends Iterable<Instance> {
 
 	/**
 	 * Adds an instance to the dataset if the instance has the same attributes as the dataset
-	 * The instance cannot be changed once it enters the Dataset, only removed
 	 * @param i instance to add
 	 * @return true if successful, false if unsuccessful
 	 */
@@ -18,14 +18,15 @@ public interface Dataset {
 	boolean remove(Instance i);
 
 	/**
-	 * return an instance in the dataset
-	 * @param index - index of the instance to return
+	 * Returns an instance belonging to the dataset, in position index
+	 * @param index position of the instance
+	 * @return Instance at position index, or null if it doesn't exist
 	 */
 	Instance getInstance(int index);
 
 	/**
-	 * Return the maximum value the class has
-	 * @return the maximum value the class has
+	 * Return the maximum value that the class takes in all the instances
+	 * @return the maximum value the class takes, or -1 in case of error
 	 */
 	int getMaxClassValue();
 	
@@ -36,8 +37,9 @@ public interface Dataset {
 	int getNumberOfInstances();
 
 	/**
-	 * Return the maximum value an attribute has
+	 * Return the maximum value an attribute takes in all the instances
 	 * @param a - attribute
+	 * @return maximum attribute value, or -1 in case of error
 	 */
 	int getMaxAttributeValue(Attribute a);
 
