@@ -21,7 +21,7 @@ public class ClassifierMetrics {
 	long timeToBuild;
 	long timeToTest; 
 	double accuracy;
-	double[] f1score,specificity,sensitivity,precision; 
+	double[] f1score,specificity,sensitivity; 
 	
 	
 
@@ -34,7 +34,6 @@ public class ClassifierMetrics {
 		//weighted metrics
 		this.specificity[this.numb_classes]=0;
 		this.sensitivity[this.numb_classes]=0;
-		this.precision[this.numb_classes]=0;
 		this.f1score[this.numb_classes]= 0;
 		
 		for (Integer i : this.classes){
@@ -64,19 +63,29 @@ public class ClassifierMetrics {
 					}
 				}
 			}
-			this.specificity[i]=(true_negatives)/(true_negatives+false_positives);
-			this.sensitivity[i]= (true_positives)/(true_positives+false_negatives);
-			this.precision[i]= (true_positives)/(true_positives+false_positives);
-			this.f1score[i]= 2*true_positives/(2*true_positives+false_negatives+false_positives);
-			this.weight_classes[i]=(true_positives+false_negatives)/(double)this.total;
+			if(true_negatives+false_positives != 0)
+				this.specificity[i]=((double)true_negatives)/(true_negatives+false_positives);
+			else
+				this.specificity[i]=1;
+			
+			if(true_positives+false_negatives != 0)
+				this.sensitivity[i]= ((double)true_positives)/(true_positives+false_negatives);
+			else
+				this.sensitivity[i]=1;
+			
+			if(2*true_positives+false_negatives+false_positives != 0)
+				this.f1score[i]= 2*((double)true_positives)/(2*true_positives+false_negatives+false_positives);
+			else
+				this.f1score[i]=1;
+			
+			this.weight_classes[i]=((double)true_positives+false_negatives)/(double)this.total;
 			//weighted metrics
 			this.specificity[this.numb_classes]+=this.weight_classes[i]*this.specificity[i];
 			this.sensitivity[this.numb_classes]+=this.weight_classes[i]*this.sensitivity[i];
-			this.precision[this.numb_classes]+=this.weight_classes[i]*this.precision[i];
 			this.f1score[this.numb_classes]+=this.weight_classes[i]*this.f1score[i];
 			}
 		
-		this.accuracy=correct_classifications/this.total;
+		this.accuracy=(double)correct_classifications/this.total;
 		
 		return;
 	}
@@ -129,14 +138,6 @@ public class ClassifierMetrics {
 		return output;
 	}
 	
-	/**Returns an array with the classfier's Precision for each class and the weighted Precision
-	 * @return array with the classfier's Precision for each class and the weighted Precision
-	 */
-	public double[] getPrecision() {
-		double []output=new double[numb_classes+1];
-		output=Arrays.copyOf(this.precision,numb_classes+1);
-		return output;
-	}
 	
 	
 	@Override
@@ -206,7 +207,6 @@ public class ClassifierMetrics {
 		this.f1score=new double[numb_classes+1];
 		this.specificity=new double[numb_classes+1];
 		this.sensitivity=new double[numb_classes+1];
-		this.precision=new double[numb_classes+1];
 		this.weight_classes=new double[numb_classes];
 		
 		computeMetrics();
