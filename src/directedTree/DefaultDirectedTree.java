@@ -122,9 +122,33 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		
 		root=new TreeNode<V>(vertex);
 		
-		fillnode(root, s, index, index);
-
+		fillnode(root, s, index, index);	
+	}
+	
+	
+	String getStringTree(TreeNode<V> iter, String to_str) {
+		String aux = new String();
+		int nChilds = iter.children.size();
+		//System.out.println("nChilds:" +nChilds);
+		for (int i=0; i < nChilds; i++)
+		{
+			to_str+=(iter.children.get(i).vertex+ ":" + iter.vertex +"\n");
+			to_str+=getStringTree(iter.children.get(i),aux);
+		}
 		
+		return to_str;
+	}
+	
+	
+	@Override
+	public String toString() {
+		
+		String to_str= new String();
+		
+		to_str+=(root.vertex+ ":\n");
+		to_str=getStringTree(root,to_str);
+		
+		return to_str;
 	}
 		
 /*

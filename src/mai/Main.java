@@ -47,7 +47,7 @@ public class Main {
 		DefaultDirectedTree<Integer> tree0 =  new DefaultDirectedTree<Integer>();
 	    
 		tree0.loadFromSpanningTree(spanningTree);
-		
+		/*
 		System.out.println(tree0.getParent(1));
 		System.out.println(tree0.getParent(3));
 		System.out.println(tree0.getParent(0));
@@ -59,7 +59,9 @@ public class Main {
 		System.out.println(tree0.getChildren(0));
 		System.out.println(tree0.getChildren(4));
 		System.out.println(tree0.getChildren(2));
+		*/
 		
+		System.out.println(tree0);
 		
 		
 	}
