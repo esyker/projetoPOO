@@ -7,19 +7,22 @@ import graph.PrimMaxSpanningTree;
 public class Main {
 	
 	public static void main(String[] args){
-		DenseUndirectedWeightedGraph<Integer> graph = new DenseUndirectedWeightedGraph<Integer>(5);
-		graph.addVertex(0);
+		DenseUndirectedWeightedGraph<Integer> graph = new DenseUndirectedWeightedGraph<Integer>(8);
 		graph.addVertex(1);
 		graph.addVertex(2);
 		graph.addVertex(3);
 		graph.addVertex(4);
-		graph.setEdgeWeight(0,1,2);
-		graph.setEdgeWeight(0,3,6);
-		graph.setEdgeWeight(1,2,3);
-		graph.setEdgeWeight(1,3,8);
-		graph.setEdgeWeight(1,4,5);
-		graph.setEdgeWeight(2,4,7);
-		graph.setEdgeWeight(3,4,9);
+		graph.addVertex(5);
+		graph.addVertex(6);
+		graph.addVertex(7);
+		graph.addVertex(8);
+		graph.setEdgeWeight(3,7,1);
+		graph.setEdgeWeight(7,4,1);
+		graph.setEdgeWeight(7,6,1);
+		graph.setEdgeWeight(4,5,1);
+		graph.setEdgeWeight(5,8,1);
+		graph.setEdgeWeight(8,2,1);
+		graph.setEdgeWeight(2,1,1);
 		
 		/*
 		float[][]graph_representation=graph.getWeightsMatrix();
@@ -32,18 +35,19 @@ public class Main {
 			System.out.println("\n");
 		}*/
 
-		System.out.println(graph);
+		//System.out.println(graph);
 		
 		PrimMaxSpanningTree<Integer> tree =new PrimMaxSpanningTree<Integer>(graph);
 		SpanningTree<Integer> spanningTree=tree.getSpanningTree();
-
+		System.out.print(spanningTree);
+		/*
 		System.out.print(spanningTree.toString());
 		System.out.println(spanningTree.findHeight());
 
 		System.out.print(spanningTree);
 		System.out.println(spanningTree.isTree());
 		System.out.println(graph.isTree());
-		
+		*/
 		DefaultDirectedTree<Integer> tree0 =  new DefaultDirectedTree<Integer>();
 	    
 		tree0.loadFromSpanningTree(spanningTree);
