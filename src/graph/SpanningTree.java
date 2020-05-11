@@ -92,16 +92,13 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
         }
         int index=0;
         int ht = depth[0]; 
-        System.out.println("depht0:"+ depth[0]);
         for (i = 1; i < currSize; i++) { 
-        	System.out.println("depht"+ i +":"+ depth[i]);
             if (ht > depth[i]) { 
                 ht = depth[i]; 
                 index=i;
                 
             } 
         } 
-        System.out.println("index:"+ index+"\n");
         return index; 
     }
 
