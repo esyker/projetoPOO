@@ -10,20 +10,21 @@ import dataset.DatasetLoader;
 public class Main {
 	public static void main(String[] args) {
 		
+		String[] args_teste = {"bias-train.csv", "bias-test.csv", "MDL"}; 
 		//input parameters check
-		if(args.length != 3)
+		if(args_teste.length != 3)
 		{
 			System.out.println("Invalid number of arguments");
 			return;
 		}
-		if(!args[2].equals("LL") && !args[2].equals("MDL"))
+		if(!args_teste[2].equals("LL") && !args_teste[2].equals("MDL"))
 		{
 			System.out.println("Third argument must be either LL or MDL");
 			return;
 		}
 		
-		Dataset train = DatasetLoader.loadDatasetFromCsv(args[0]);
-		Dataset test = DatasetLoader.loadDatasetFromCsv(args[1]);
+		Dataset train = DatasetLoader.loadDatasetFromCsv(args_teste[0]);
+		Dataset test = DatasetLoader.loadDatasetFromCsv(args_teste[1]);
 		if(train == null)
 		{
 			System.out.println("Error reading train file (1st argument)");
@@ -36,7 +37,7 @@ public class Main {
 		}
 			
 		Classifier c;
-		if(args[2].equals("MDL"))
+		if(args_teste[2].equals("MDL"))
 			c = new MDLBayesianNetworkClassifier();
 		else
 			c = new LLBayesianNetworkClassifier();
