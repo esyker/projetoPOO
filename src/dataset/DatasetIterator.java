@@ -2,11 +2,18 @@ package dataset;
 
 import java.util.Iterator;
 
+/**
+ * Iterator for the Dataset
+ */
 public class DatasetIterator implements Iterator<Instance> {
 	
 	private int current;
 	private Dataset d;
 	
+	/**
+	 * Constructor
+	 * @param d Dataset to iterate through
+	 */
 	public DatasetIterator(Dataset d) {
 		super();
 		this.d = d;

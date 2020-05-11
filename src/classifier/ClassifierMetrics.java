@@ -197,11 +197,9 @@ public class ClassifierMetrics {
 		}
 		
 		//Get available classes type and number
-		for(int i=0; i<true_classes.length; i++){
-	        if(!this.classes.contains(true_classes[i])){
-	            this.classes.add(true_classes[i]);
-	            numb_classes++;
-	        }
+		numb_classes = Math.max(trainDataset.getMaxClassValue()+1, testDataset.getMaxClassValue()+1);
+		for(int i=0; i<numb_classes; i++){
+	            this.classes.add(i);
 	    }
 		
 		this.f1score=new double[numb_classes+1];

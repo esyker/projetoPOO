@@ -2,6 +2,11 @@ package classifier;
 
 import dataset.Attribute;
 
+/**
+ * This class implements a Tree Augmented Naive Bayes Classifier that uses
+ * the minimum description length (MDL) scoring criteria to calculate the weights 
+ * between attributes
+ */
 public class MDLBayesianNetworkClassifier extends AbstractBayesianNetworkClassifier {
 
 	/**

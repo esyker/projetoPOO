@@ -1,5 +1,11 @@
 package dataset;
 
+/**
+ * An Attribute (or feature), which is represented by a 
+ * label (or name) (String) is a class meant to represent 
+ * features belonging to an Instance
+ *
+ */
 public class Attribute {
 
 	protected String label;
@@ -12,6 +18,17 @@ public class Attribute {
 		this.label = label;
 	}
 	
+	
+	/**
+	 * Get the label of an attribute
+	 * @return label of the attribute
+	 */
+	public String getLabel() {
+		return label;
+	}
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

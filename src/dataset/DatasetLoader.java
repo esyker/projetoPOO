@@ -4,8 +4,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * The purpose of this abstract class is to create and return an
+ * object Dataset that contains the information present
+ * in a file
+ */
 public abstract class DatasetLoader {
 	
+	/**
+	 * Static method that creates a Dataset Object based on the information
+	 * of a .csv file
+	 * @param filepath path (relative or absolute) of the .csv file in the file system 
+	 * @return the Dataset Object
+	 */
 	public static Dataset loadDatasetFromCsv(String filepath)
 	{
 		String line = "";
