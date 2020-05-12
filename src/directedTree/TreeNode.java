@@ -1,6 +1,7 @@
 package directedTree;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TreeNode<V> {
 
@@ -8,17 +9,19 @@ public class TreeNode<V> {
 	List<TreeNode<V>> children;
 	protected V vertex;
 	
-	//Constructor
+	/**
+	 * Creates a node
+	 * @param vertex value of the vertex of the node
+	 */
 	public TreeNode(V vertex) {
 		this.vertex = vertex;
 		this.children = new LinkedList<TreeNode<V>>();
-		//this.elementsIndex = new LinkedList<TreeNode<T>>();
-		//this.elementsIndex.add(this);
 	}
 
 	/**
-	 * 
-	 * @param vertex
+	 * Adds a child to node 
+	 * @param vertex value of the vertex child
+	 * @return node of the new child
 	 */
 	public TreeNode<V> addChild(V vertex) {
 		TreeNode<V> childNode = new TreeNode<V>(vertex);
