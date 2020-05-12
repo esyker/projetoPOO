@@ -48,21 +48,21 @@ public class ClassifierMetrics {
 			for(int j=0;j<this.total;j++) {
 				if(true_classes[j]!=i)//negative class
 				{
-					if(true_classes[j]==predicted_classes[j]) {//negative class predicted
+					if(true_classes[j]==predicted_classes[j]) {//true class predicted
 						true_negatives++;
 					}
-					else if(true_classes[j]!=predicted_classes[j]) {//positive class predicted
-						false_positives++;
+					else if(true_classes[j]!=predicted_classes[j]) {//false class predicted
+						false_negatives++;
 					}
 				}
 				else if(true_classes[j]==i)//positive class
 				{
-					if(true_classes[j]==predicted_classes[j]) {//positive class predicted
+					if(true_classes[j]==predicted_classes[j]) {//true class predicted
 						true_positives++;
 						correct_classifications++;
 					}
-					else if(true_classes[j]!=predicted_classes[j]) {//negative class predicted
-						false_negatives++;
+					else if(true_classes[j]!=predicted_classes[j]) {//false class predicted
+						false_positives++;
 					}
 				}
 			}
@@ -164,7 +164,7 @@ public class ClassifierMetrics {
 	}
 
 	/** Creates a new Classifier Metrics
-	 * 	Constructer used to train the classifier and test it and get appropriate measures of performance
+	 * 	Constructor used to train the classifier and test it and get appropriate measures of performance
 	 * @param c Classifier used
 	 * @param trainData Dataset used to train
 	 * @param testData Dataset used to test and get the metrics

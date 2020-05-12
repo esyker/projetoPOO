@@ -10,7 +10,7 @@ import dataset.DatasetLoader;
 public class Main {
 	public static void main(String[] args) {
 		
-		String[] args_teste = {"heart-train.csv", "heart-test.csv", "MDL"}; 
+		String[] args_teste = {"heart-train.csv", "heart-test.csv", "LL"}; 
 		//input parameters check
 		if(args_teste.length != 3)
 		{
