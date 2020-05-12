@@ -44,6 +44,8 @@ public class Main {
 		ClassifierMetrics metrics = new ClassifierMetrics(c, train,test);
 		System.out.println(metrics);
 		
+		c.classify(test.getInstance(10));
+		
 	
 	}
 	

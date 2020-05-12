@@ -8,35 +8,38 @@ public interface DirectedTree<V> {
 
 	
 	/**
-	 * 
-	 * @param parent
-	 * @param child
+	 * Adds a child to a given parent of a directedTree
+	 * @param parent value of parent
+	 * @param child value of child
 	 */
 	void addChild(V parent, V child);
 
 	/**
-	 * 
-	 * @param parent
+	 * Returns the list of children from a given parent 
+	 * @param parent value of parent
+	 * @return list of children
 	 */
 	List<V> getChildren(V parent);
-
+	
+	/**
+	 * Returns the value of the root
+	 * @return value of the root
+	 */
 	V getRoot();
 
 	/**
-	 * 
-	 * @param child
+	 * Returns the value of the parent from a given child
+	 * @param child value of child
+	 * @return value of the parent
 	 */
 	V getParent(V child);
 
-	/**
-	 * 
-	 * @param vertex
-	 */
+	
 	//void removeNode(V vertex);
 
 	/**
-	 * 
-	 * @param s
+	 * Creates a directed spanning Tree from a SpanningTree
+	 * @param s SpanningTree
 	 */
 	void loadFromSpanningTree(SpanningTree<V> s);
 

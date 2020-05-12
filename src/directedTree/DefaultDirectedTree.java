@@ -8,16 +8,28 @@ import graph.*;
 public class DefaultDirectedTree<V> implements DirectedTree<V> {
 
 	TreeNode<V> root;
-
+	
+	/**
+	 * Creates an DefaultDirectedTree with root vertex 
+	 * @param vertex root of the new DefaultDirectedTree
+	 */
 	public DefaultDirectedTree(V vertex) {
 		root = new TreeNode<V>(vertex);
 	}
-
+	
+	/**
+	 * Creates an empty DefaultDirectedTree  
+	 *
+	 */
 	public DefaultDirectedTree() {
 		
 	}
 
-
+	/**
+	 * Adds a child to a given parent of a directedTree
+	 * @param parent value of parent
+	 * @param child value of child
+	 */
 	@Override
 	public void addChild(V parent, V child) {
 		
@@ -26,7 +38,13 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		
 	}
 	
-	TreeNode<V> findTreeNode(TreeNode<V> iter, V find) {
+	/**
+	 * Recursive depth search on a tree
+	 * @param iter current node of the tree
+	 * @param find value of the TreeNode to find
+	 * @return Node of the element to find
+	 */
+	protected TreeNode<V> findTreeNode(TreeNode<V> iter, V find) {
 		TreeNode<V> res=iter;
 		int nChilds = iter.children.size();
 		
@@ -56,7 +74,11 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		return res;
 	}
 	
-	
+	/**
+	 * Returns the list of children from a given parent 
+	 * @param parent value of parent
+	 * @return list of children
+	 */
 	@Override
 	public List<V> getChildren(V parent) {
 		TreeNode<V> parentNode=null;
@@ -74,14 +96,23 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		
 		return vertix;
 	}
-
+	
+	/**
+	 * Returns the value of the root
+	 * @return value of the root
+	 */
 	@Override
 	public V getRoot() {
 
 		return root.vertex;
 		
 	}
-
+	
+	/**
+	 * Returns the value of the parent from a given child
+	 * @param child value of child
+	 * @return value of the parent
+	 */
 	@Override
 	public V getParent(V child) {
 		
@@ -96,9 +127,14 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		return childNode.parent.vertex;
 
 	}
-
 	
-	
+	/**
+	 * Recursive copy from spanningTree 
+	 * @param node current node of the tree
+	 * @param s spanningTree to copy
+	 * @param index spanningTree to copy
+	 * @param previus index of parent
+	 */
 	private void fillnode(TreeNode<V> node, SpanningTree<V> s, int index, int previous) {
 			
 		int size=s.getNumbVertices();
@@ -113,7 +149,11 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 			}
 		}
 	}
-
+	
+	/**
+	 * Creates a directed spanning Tree from a SpanningTree
+	 * @param s SpanningTree
+	 */
 	@Override
 	public void loadFromSpanningTree(SpanningTree<V> s) {
 
@@ -125,8 +165,14 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		fillnode(root, s, index, index);	
 	}
 	
-	
-	String getStringTree(TreeNode<V> iter, String to_str) {
+	/**
+	 * Recursive iteration over a tree to put vertex edges on string  
+	 * @param iter current node of the tree
+	 * @param to_str string to fill
+	 * @param previus index of parent
+	 * @return string with edges of tree
+	 */
+	private String getStringTree(TreeNode<V> iter, String to_str) {
 		String aux = new String();
 		int nChilds = iter.children.size();
 		//System.out.println("nChilds:" +nChilds);

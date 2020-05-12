@@ -63,6 +63,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		int s = trainSet.getMaxClassValue() + 1;
 		
 		double class_OFE = (computeNc(c) + N_prime)/(computeN()+s*N_prime);
+		
 		return class_OFE;
 	}
 
@@ -102,9 +103,9 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		if(i == null && i_prime == null)
 			return computeNc(c);
 		if(i == null)
-			return computeNikc(i,k,c);
-		if(i_prime == null)
 			return computeNikc(i_prime,j,c);
+		if(i_prime == null)
+			return computeNikc(i,k,c);
 			
 		for(Instance inst:trainSet)
 		{
@@ -214,7 +215,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	@Override
 	public int classify(Instance i) {
 		int class_max = 0;
-		double maximum_prob = 0;
+		double maximum_prob = Double.NEGATIVE_INFINITY;
 		for(int j = 0; j <= trainSet.getMaxClassValue(); j++)
 		{
 			double prob = computeJointProbabilityD(i,j);
