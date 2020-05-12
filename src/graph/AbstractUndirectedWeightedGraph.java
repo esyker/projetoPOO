@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This class is a graph abstraction
+ * This class is a Weighted graph abstraction
  */
 public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGraph<V> {
 

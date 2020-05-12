@@ -4,6 +4,12 @@ import java.util.List;
 
 import graph.*;
 
+/**
+ * Interface to Directed Trees
+ * An Directed Tree is is a directed graph with a designated node,
+ * the root, such that for each node, there is exactly one path from  
+ * the root to that node
+ */
 public interface DirectedTree<V> {
 
 	

@@ -2,8 +2,13 @@ package directedTree;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import graph.*;
+
+/**
+ * This class implements a Directed tree through a pointer to its root
+ * and several methods to operate over it.
+ * All the methods necessary to the project are implemented.
+ */
 
 public class DefaultDirectedTree<V> implements DirectedTree<V> {
 
@@ -152,6 +157,7 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 	
 	/**
 	 * Creates a directed spanning Tree from a SpanningTree
+	 * adjacency matrix
 	 * @param s SpanningTree
 	 */
 	@Override

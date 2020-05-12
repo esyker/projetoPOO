@@ -72,6 +72,13 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 			return false;
 	}	
 	
+	/** 
+	 * Recursive method that finds the maximum height
+	 * that given element generates 
+	 * @param i element to iterate
+	 * @param previus index of the i variable
+	 * @return height of the element
+	 */
     private int findDepth(int i, int previous) {
     	int aux =i;
 		int res=0;
@@ -90,7 +97,12 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 		
 		return res;
 	}
-
+    
+    /** 
+	 * Finds the index of the adjacency matrix
+	 * that has the shortest height
+	 * @return the index of the shortest height
+	 */
     public int findHeight() { 
     	int i;
 

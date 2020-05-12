@@ -1,7 +1,7 @@
 package graph;
 
 /**
- * Implements a graph
+ * Implements a Dense Weighted graph
  */
 public class DenseUndirectedWeightedGraph<V> extends AbstractUndirectedWeightedGraph<V> {
 	

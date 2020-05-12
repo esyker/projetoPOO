@@ -3,6 +3,11 @@ package directedTree;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * This class implements nodes that can be used on directed trees
+ * and several methods to operate over them.
+ * All the methods necessary to the project are implemented.
+ */
 public class TreeNode<V> {
 
 	TreeNode<V> parent;
