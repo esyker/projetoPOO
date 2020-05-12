@@ -2,12 +2,21 @@ package dataset;
 
 import java.util.*;
 
+/**
+ * This class implements a Dataset in which the set
+ * of instances is represented by a List and the set
+ * of Attributes by an array
+ */
 public class DefaultDataset implements Dataset {
 
 	protected List<Instance> instacesList;
 	
 	protected Attribute[] attributes;
-
+	
+	/**
+	 * Constructor
+	 * @param attributes array of Attributes that compose the dataset 
+	 */
 	public DefaultDataset(Attribute[] attributes) {
 		instacesList = new LinkedList<Instance>();
 		//save a copy of the array of attributes, so it can't be changed outside this class

@@ -1,5 +1,9 @@
 package dataset;
 
+/**
+ * An Instance is a collection of values (int), each one 
+ * associated to an Attribute, plus a value for the class (int) 
+ */
 public interface Instance {
 
 	/**

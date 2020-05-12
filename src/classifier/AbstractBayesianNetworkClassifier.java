@@ -2,6 +2,7 @@ package classifier;
 
 import dataset.*;
 
+
 import directedTree.DefaultDirectedTree;
 import directedTree.DirectedTree;
 import graph.AbstractUndirectedWeightedGraph;
@@ -10,11 +11,22 @@ import graph.PrimMaxSpanningTree;
 import graph.SpanningTree;
 import graph.SpanningTreeAlgorithm;
 
+/**
+ * This class implements a Tree Augmented Naive Bayes Classifier,
+ * with a N_prime value of 0.5. This type of classifier uses a tree
+ * whose nodes are the attributes of the dataset to make the 
+ * classifications.
+ * All the methods necessary are already implemented, except the method
+ * to compute the weights between two attributes. This method
+ * must be implemented in a concrete class that extends this abstract
+ * class.
+ *
+ */
 public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 
 	protected Dataset trainSet;
 	protected DirectedTree<Attribute> directedTree;
-	protected final double N_prime = (double) 0.5;
+	protected static final double N_prime = (double) 0.5;
 
 	
 	/**
@@ -156,7 +168,8 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	}
 	
 	
-	/**Build the classifier from the given training dataset
+	/**
+	 * Build the classifier from the given training dataset
 	 * @param data training dataset
 	 */
 	@Override

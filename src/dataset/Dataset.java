@@ -1,6 +1,12 @@
 package dataset;
 
-
+/**
+ * The Dataset is a set of Instances. The values of the Attributes
+ * and the values of the class range between 0 and the maximum value
+ * for that attribute/class. The Dataset interface also extends the
+ * Iterable interface, to more easily iterate through the Instaces
+ * of the Dataset
+ */
 public interface Dataset extends Iterable<Instance> {
 
 	/**

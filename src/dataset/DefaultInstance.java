@@ -2,12 +2,21 @@ package dataset;
 
 import java.util.*;
 
+/**
+ * This class implements an Instance where the
+ * association between the Attributes and its values
+ * are stored in a HashMap
+ */
 public class DefaultInstance implements Instance {
 
 	protected Map<Attribute, Integer> attributeValues; //key-value map of attributes and respective values
 	protected int classValue;
 	
 
+	/**
+	 * Constructor - the class value is initialized with the default 
+	 * value of -1
+	 */
 	public DefaultInstance() {
 		attributeValues = new HashMap<Attribute,Integer>();
 		classValue = -1;
