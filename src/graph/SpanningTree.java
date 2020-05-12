@@ -1,16 +1,25 @@
 package graph;
 
-
+/** Implements a tree data structure
+ */
 public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 
 	
+	/** Creates a new tree data structure
+	 * @param max_numb_vertices Maximum number of vertices tree can have
+	 */
 	public SpanningTree(int max_numb_vertices) {
 		super(max_numb_vertices);
 	}
 
-
-    
 	
+	/** This method connects two vertices and checks if the 
+	 * connection creates a cycle in the tree, if it is created
+	 * the connection creation is aborted
+	 * @param v1 Vertex 1 to connect
+	 * @param v2 Vertex 2 to connect
+	 * @return true if edge was added, false otherwise
+	 */
     @Override
 	public boolean addEdge(V v1, V v2) {
 
@@ -33,6 +42,14 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 			return false;
 	}
     
+    /** This method connects two vertices and checks if the 
+	 * connection creates a cycle in the tree, if it is created
+	 * the connection creation is aborted
+	 * @param v1 Vertex1 to connect
+	 * @param v2 Vertex2 to connect
+	 * @param weight weight of the edge
+	 * @return true if edge was added, false otherwise
+	 */
 	@Override
 	public boolean setEdgeWeight(V v1, V v2, double weight) {
 
@@ -53,11 +70,7 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 		}
 		else 
 			return false;
-	}
-
-	
-
-	
+	}	
 	
     private int findDepth(int i, int previous) {
     	int aux =i;
@@ -103,58 +116,3 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
     }
 
 }
-
-/*
-
-
-// A recursive function that uses visited[] and parent 
-// to detect cycle in subgraph reachable from vertex v. 
-Boolean isCyclic(int v, Boolean visited[], int parent) 
-{ 
-    // Mark the current node as visited 
-    visited[v] = true; 
-    Integer i; 
-
-    // Recur for all the vertices adjacent to this vertex 
-    for(i=0;i<this.max_numb_vertices;i++) {
-    	if(v!=i && this.weight_matrix[v][i]>0) {
-    		// If an adjacent is not visited, then recur for that adjacent 
-    		if(!visited[i]) {
-    			if(isCyclic(i,visited,v))
-    				return true;
-        	}
-    		// If an adjacent is visited and not parent of  
-            // current vertex, then there is a cycle. 
-            else if (i != parent) 
-               return true; 
-    	}
-    }
-    return false; 
-}
-
-public boolean isTree() // Returns true if the graph is a tree, else false. 
-{ 
-    // Mark all the vertices as not visited and not part 
-    // of recursion stack 
-    Boolean visited[] = new Boolean[this.max_numb_vertices]; 
-    for (int i = 0; i <this.max_numb_vertices; i++) 
-        visited[i] = false; 
-
-    // The call to isCyclicUtil serves multiple purposes 
-    // It returns true if graph reachable from vertex 0 
-    // is cyclic. It also marks all vertices reachable 
-    // from 0. 
-    if (isCyclic(0, visited, -1))
-        return false; 
-
-    // If we find a vertex which is not reachable from 0 
-    // (not marked by isCyclicUtil(), then we return false 
-    //for (int u = 0; u <this.max_numb_vertices; u++) 
-    //    if (!visited[u]) 
-    //        return false; 
-
-    return true; 
-} 
-
-
-*/

@@ -3,6 +3,9 @@ package graph;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * This class is a graph abstraction
+ */
 public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGraph<V> {
 
 	protected double[][] weight_matrix;
@@ -10,8 +13,6 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 	
 	protected int currSize;
 	protected int max_numb_vertices;
-	
-	
 	
 	
 	public AbstractUndirectedWeightedGraph(int max_numb_vertices) {
@@ -28,9 +29,11 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 		this.max_numb_vertices=max_numb_vertices;
 		this.currSize=0;
 	}
-
-	// A recursive function that uses visited[] and parent 
-    // to detect cycle in subgraph reachable from vertex v. 
+	
+	/**	 A recursive function that uses visited[] and parent 
+	 * to detect cycle in subgraph reachable from vertex v.
+	 * @return true if the graph is cyclic, false if acyclic
+	 */
     protected boolean isCyclic(int v, Boolean visited[], int parent) 
     { 	        
         // Mark the current node as visited 
@@ -54,7 +57,10 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
         return false; 
     }
     
-    public boolean isGraphCyclic() // Returns true if the graph is a tree, else false. 
+    /**
+	 * @return true if the graph is cyclic, false if acyclic
+	 */
+    public boolean isGraphCyclic() 
     { 
         // Mark all the vertices as not visited and not part 
         // of recursion stack 
@@ -72,7 +78,11 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
         return true; 
     } 
     
-    public boolean isTree() // Returns true if the graph is a tree, else false. 
+    /**
+	 * @return true if the graph is acyclic and all the vertices have a connection,
+	 * false otherwise
+	 */
+    public boolean isTree()
     { 
         // Mark all the vertices as not visited and not part 
         // of recursion stack 
@@ -96,6 +106,10 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
         return true; 
     } 
 	
+    /**
+	 * @param vertex New vertex to add to the graph
+	 * @return true if vertex was added , false otherwise
+	 */
 	@Override
 	public boolean addVertex(V vertex) {
 
@@ -107,6 +121,11 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 		return true;
 	}
 	
+	/**
+	 * @param v1 Vertex 1 to disconnect
+	 * @param v2 Vertex 2 to disconnect
+	 * @return true if vertex was removed, false otherwise
+	 */
 	@Override
 	public boolean removeEdge(V v1, V v2) {
 		
@@ -122,13 +141,20 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 	}
 	
 	
-
+	/**
+	 * @return a list with the vertices from the graph
+	 */
 	@Override
 	public List<V> getVertices() {
 		
 		return new LinkedList<V>(this.vertices);
 	}
-
+	
+	/**
+	 * @param v1 vertex 1 
+	 * @param v2 vertex 2
+	 * @return the value of the edge between the two vertices
+	 */
 	@Override
 	public double getEdgeWeight(V v1, V v2) {
 		
@@ -156,13 +182,16 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 		to_str+=("Vertices:"+this.getVertices()+"\n");
 		return to_str;
 	}
-		
-	public V getVertexFromIndex(int index) {
-		return this.vertices.get(index);
-	}
 	
+	/**
+	 * @return number of vertices in the graph
+	 */
 	public int getNumbVertices() {
 		return this.currSize;
+	}
+	
+	public V getVertexFromIndex(int index) {
+		return this.vertices.get(index);
 	}
 	
 	public double [][] getWeightsMatrix(){

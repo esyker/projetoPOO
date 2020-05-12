@@ -6,6 +6,9 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Implements a measurer of a Classifier performance
+ */
 public class ClassifierMetrics {
 
 	Classifier classifier;
@@ -158,13 +161,10 @@ public class ClassifierMetrics {
 				Arrays.toString(sensitivity)+","+
 				Arrays.toString(f1score);
 		return output;
-		//"classes "+classes+"\n"+
-		//"labels"+Arrays.toString(true_classes)+"\n"+
-		//"predicted_classes"+Arrays.toString(predicted_classes)+"\n"+
 	}
 
-	/**
-	 * 	Function used to train the classifier and test it and get appropriate measures of performance
+	/** Creates a new Classifier Metrics
+	 * 	Constructer used to train the classifier and test it and get appropriate measures of performance
 	 * @param c Classifier used
 	 * @param trainData Dataset used to train
 	 * @param testData Dataset used to test and get the metrics
