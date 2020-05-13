@@ -162,8 +162,8 @@ public class ClassifierMetrics {
 		}
 		
 		output+="Time to test:\t"+timeToTest+" ms\n"+
-				"Resume:\t"+"accuracy: "+
-				accuracy+", ";
+				"Resume:\t"+"accuracy:"+
+				accuracy+" ";
 		
 		output+="specificity:";
 		for(int i=0;i<=this.numb_classes;i++) {
