@@ -5,6 +5,8 @@ import java.time.Instant;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.math.RoundingMode;
+import java.lang.Math;
 
 /**
  * Implements a measurer of a Classifier performance
@@ -145,6 +147,11 @@ public class ClassifierMetrics {
 	
 	@Override
 	public String toString() {
+		/*
+		DecimalFormat df = new DecimalFormat();
+		df.applyPattern("#.###");
+		df.setRoundingMode(RoundingMode.HALF_UP);*/
+		
 		String output=new String();
 		output=	"Classfier:\n"+classifier+"\n"+
 				"Time to Build:\t"+timeToBuild+" ms\n"+
@@ -155,11 +162,41 @@ public class ClassifierMetrics {
 		}
 		
 		output+="Time to test:\t"+timeToTest+" ms\n"+
-				"Resume:\t"+
-				accuracy+","+
-				Arrays.toString(specificity)+","+
-				Arrays.toString(sensitivity)+","+
-				Arrays.toString(f1score);
+				"Resume:\t"+"accuracy: "+
+				accuracy+", ";
+		
+		output+="specificity:";
+		for(int i=0;i<=this.numb_classes;i++) {
+			if(i==0) 
+				output+="[";
+			if(i<this.numb_classes) {
+				output+=(classes.get(i)+":"+Math.round(this.specificity[i]*1000d)/1000d+", ");
+			}
+			else
+				output+="weighted:"+Math.round(this.specificity[i]*1000d)/1000d+"] ";
+		}
+		
+		output+="sensitivity:";
+		for(int i=0;i<=this.numb_classes;i++) {
+			if(i==0) 
+				output+="[";
+			if(i<this.numb_classes) {
+				output+=(classes.get(i)+":"+Math.round(this.sensitivity[i]*1000d)/1000d+", ");
+			}
+			else
+				output+="weighted:"+Math.round(this.sensitivity[i]*1000d)/1000d+"] ";
+		}
+		
+		output+="f1score:";
+		for(int i=0;i<=this.numb_classes;i++) {
+			if(i==0) 
+				output+="[";
+			if(i<this.numb_classes) {
+				output+=(classes.get(i)+":"+Math.round(this.f1score[i]*1000d)/1000d+", ");
+			}
+			else
+				output+="weighted:"+Math.round(this.f1score[i]*1000d)/1000d+"] ";
+		}
 		return output;
 	}
 
