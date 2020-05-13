@@ -97,9 +97,13 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	     for(int i=1;i<this.numb_vertices;i++) {
 	    	 V vaux1=this.graph.getVertexFromIndex(i);
 	    	 V vaux2=this.graph.getVertexFromIndex(parent[i]);
-	    	 tree.addVertex(vaux1);
-	    	 tree.addVertex(vaux2);
-	    	 tree.setEdgeWeight(vaux1,vaux2,g[i][parent[i]]);
+	    	 try {
+		    	 tree.addVertex(vaux1);
+		    	 tree.addVertex(vaux2);
+		    	 tree.setEdgeWeight(vaux1,vaux2,g[i][parent[i]]);
+			} catch (GraphIsCyclicException|MaxCapacityExceededException e) {
+				e.printStackTrace();
+			}
 	     }
 	     
 		return tree;

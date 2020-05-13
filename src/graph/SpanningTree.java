@@ -19,9 +19,10 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 	 * @param v1 Vertex 1 to connect
 	 * @param v2 Vertex 2 to connect
 	 * @return true if edge was added, false otherwise
+	 * @throws GraphIsCyclicException if a cycle is created in the tree
 	 */
     @Override
-	public boolean addEdge(V v1, V v2) {
+	public boolean addEdge(V v1, V v2) throws GraphIsCyclicException {
 
 		int index1=this.vertices.indexOf(v1);
 		int index2=this.vertices.indexOf(v2);
@@ -39,7 +40,7 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 			return true;
 		}
 		else 
-			return false;
+			throw new GraphIsCyclicException();
 	}
     
     /** This method connects two vertices and checks if the 
@@ -51,7 +52,7 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 	 * @return true if edge was added, false otherwise
 	 */
 	@Override
-	public boolean setEdgeWeight(V v1, V v2, double weight) {
+	public boolean setEdgeWeight(V v1, V v2, double weight) throws GraphIsCyclicException {
 
 		int index1=this.vertices.indexOf(v1);
 		int index2=this.vertices.indexOf(v2);
@@ -69,7 +70,7 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 			return true;
 		}
 		else 
-			return false;
+			throw new GraphIsCyclicException();
 	}	
 	
 	/** 

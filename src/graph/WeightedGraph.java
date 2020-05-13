@@ -7,15 +7,17 @@ public interface WeightedGraph<V> {
 	/**
 	 * @param vertex New vertex to add to the graph
 	 * @return true if vertex was added , false otherwise
+	 * @throws MaxCapacityExceededException 
 	 */
-	boolean addVertex(V vertex);
+	boolean addVertex(V vertex) throws MaxCapacityExceededException;
 
 	/**
 	 * @param v1 Vertex 1 to connect
 	 * @param v2 Vertex 2 to connect
 	 * @return true if edge was added, false otherwise
+	 * @throws GraphIsCyclicException 
 	 */
-	boolean addEdge(V v1, V v2);
+	boolean addEdge(V v1, V v2) throws GraphIsCyclicException;
 
 	
 	/**
@@ -23,8 +25,9 @@ public interface WeightedGraph<V> {
 	 * @param v2 Vertex2 to connect
 	 * @param weight weight of the edge
 	 * @return true if edge was added, false otherwise
+	 * @throws GraphIsCyclicException 
 	 */
-	boolean setEdgeWeight(V v1, V v2, double weight);
+	boolean setEdgeWeight(V v1, V v2, double weight) throws GraphIsCyclicException;
 	
 	
 	/**

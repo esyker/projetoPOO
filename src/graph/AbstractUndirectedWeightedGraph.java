@@ -109,13 +109,20 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
     /**
 	 * @param vertex New vertex to add to the graph
 	 * @return true if vertex was added , false otherwise
+	 * @throws MaxCapacityExceededException if the graph capacity is exceeded
 	 */
 	@Override
-	public boolean addVertex(V vertex) {
+	public boolean addVertex (V vertex) throws MaxCapacityExceededException {
 
-		if(currSize==this.max_numb_vertices||this.vertices.contains(vertex))
+		if(vertex == null)
+			throw new NullPointerException();
+			
+		if(this.vertices.contains(vertex))
 			return false;
-
+		
+		if(currSize==this.max_numb_vertices)
+			throw new MaxCapacityExceededException();
+		
 		this.vertices.add(vertex);
 		this.currSize++;
 		return true;

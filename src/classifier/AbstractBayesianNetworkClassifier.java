@@ -7,6 +7,8 @@ import directedTree.DefaultDirectedTree;
 import directedTree.DirectedTree;
 import graph.AbstractUndirectedWeightedGraph;
 import graph.DenseUndirectedWeightedGraph;
+import graph.GraphIsCyclicException;
+import graph.MaxCapacityExceededException;
 import graph.PrimMaxSpanningTree;
 import graph.SpanningTree;
 import graph.SpanningTreeAlgorithm;
@@ -181,7 +183,11 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 		//add all vertices to graph
 		for(int i = 0; i < atts.length; i++)
 		{
-			g.addVertex(atts[i]);
+			try {
+				g.addVertex(atts[i]);
+			} catch (MaxCapacityExceededException e) {
+				e.printStackTrace();
+			}
 		}
 		//set all edge weights
 		for(int i = 0; i < atts.length; i++)
@@ -189,8 +195,13 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 			for(int j = i+1; j < atts.length; j++)
 			{
 				double weight = computeWeight(atts[i], atts[j]);
-				g.setEdgeWeight(atts[i], atts[j], weight);
-				g.setEdgeWeight(atts[j], atts[i], weight);
+				try {
+					g.setEdgeWeight(atts[i], atts[j], weight);
+					g.setEdgeWeight(atts[j], atts[i], weight);
+				} catch (GraphIsCyclicException e) {
+					e.printStackTrace();
+				}
+				
 				
 			}
 		}
