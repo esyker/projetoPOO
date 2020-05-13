@@ -138,7 +138,7 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 	 * @param node current node of the tree
 	 * @param s spanningTree to copy
 	 * @param index spanningTree to copy
-	 * @param previus index of parent
+	 * @param previous index of parent
 	 */
 	private void fillnode(TreeNode<V> node, SpanningTree<V> s, int index, int previous) {
 			
@@ -175,7 +175,7 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 	 * Recursive iteration over a tree to put vertex edges on string  
 	 * @param iter current node of the tree
 	 * @param to_str string to fill
-	 * @param previus index of parent
+	 * @param previous index of parent
 	 * @return string with edges of tree
 	 */
 	private String getStringTree(TreeNode<V> iter, String to_str) {

@@ -46,7 +46,7 @@ public class ClassifierMetrics {
 			false_positives=0;
 			
 			for(int j=0;j<this.total;j++) {
-				if(true_classes[j]!=i)//negative class
+				if(predicted_classes[j]!=i)//negative class
 				{
 					if(true_classes[j]==predicted_classes[j]) {//true class predicted
 						true_negatives++;
@@ -55,7 +55,7 @@ public class ClassifierMetrics {
 						false_negatives++;
 					}
 				}
-				else if(true_classes[j]==i)//positive class
+				else if(predicted_classes[j]==i)//positive class
 				{
 					if(true_classes[j]==predicted_classes[j]) {//true class predicted
 						true_positives++;
@@ -86,7 +86,7 @@ public class ClassifierMetrics {
 			this.specificity[this.numb_classes]+=this.weight_classes[i]*this.specificity[i];
 			this.sensitivity[this.numb_classes]+=this.weight_classes[i]*this.sensitivity[i];
 			this.f1score[this.numb_classes]+=this.weight_classes[i]*this.f1score[i];
-			}
+		}
 		
 		this.accuracy=(double)correct_classifications/this.total;
 		

@@ -9,7 +9,7 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	protected AbstractUndirectedWeightedGraph<V> graph;
 	
 	/** Creates a new spanning tree computation from a graph
-	 * @param g input graph from wich to compute a spanning tree
+	 * @param g input graph from which to compute a spanning tree
 	 */
 	public PrimMaxSpanningTree(AbstractUndirectedWeightedGraph<V> g) {
 		this.graph=g;
@@ -40,7 +40,7 @@ public class PrimMaxSpanningTree<V> implements SpanningTreeAlgorithm<V> {
 	     return min_index; 
 	 } 
 		 
-	/** Method wich uses Prim's Spanning tree algorithm to compute
+	/** Method which uses Prim's Spanning tree algorithm to compute
 	 * the spanning tree
 	 *@return Minimum spanning tree calculated from the graph
 	 */
