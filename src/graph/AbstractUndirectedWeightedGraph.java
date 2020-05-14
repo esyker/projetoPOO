@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This class is a Weighted graph abstraction
+ * This class is a Weighted graph abstraction.
  */
 public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGraph<V> {
 
@@ -14,7 +14,10 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 	protected int currSize;
 	protected int max_numb_vertices;
 	
-	
+	/**
+	 * Create a graph object with a maximum of max_numb_vertices vertices
+	 * @param max_numb_vertices maximum number of vertices
+	 */
 	public AbstractUndirectedWeightedGraph(int max_numb_vertices) {
 		super();
 		this.weight_matrix=new double[max_numb_vertices][max_numb_vertices];
@@ -30,8 +33,9 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 		this.currSize=0;
 	}
 	
-	/**	 A recursive function that uses visited[] and parent 
-	 * to detect cycle in subgraph reachable from vertex v.
+	/**	 
+	 * A recursive function that uses visited[] and parent 
+	 * to detect cycle in subgraph reachable from vertex v. 
 	 * @return true if the graph is cyclic, false if acyclic
 	 */
     protected boolean isCyclic(int v, Boolean visited[], int parent) 
@@ -58,6 +62,7 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
     }
     
     /**
+     * Determine if the graph is cyclic
 	 * @return true if the graph is cyclic, false if acyclic
 	 */
     public boolean isGraphCyclic() 
@@ -79,6 +84,7 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
     } 
     
     /**
+     * Determine if the graph is acyclic and all the vertices have a connection
 	 * @return true if the graph is acyclic and all the vertices have a connection,
 	 * false otherwise
 	 */
@@ -107,6 +113,7 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
     } 
 	
     /**
+     * Add a vertex to the graph
 	 * @param vertex New vertex to add to the graph
 	 * @return true if vertex was added , false otherwise
 	 * @throws MaxCapacityExceededException if the graph capacity is exceeded
@@ -129,6 +136,7 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 	}
 	
 	/**
+	 * Remove an edge from the graph
 	 * @param v1 Vertex 1 to disconnect
 	 * @param v2 Vertex 2 to disconnect
 	 * @return true if vertex was removed, false otherwise
@@ -149,6 +157,7 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 	
 	
 	/**
+	 * Get the vertices from the graph
 	 * @return a list with the vertices from the graph
 	 */
 	@Override
@@ -158,6 +167,7 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 	}
 	
 	/**
+	 * Get the weight of an edge from the graph
 	 * @param v1 vertex 1 
 	 * @param v2 vertex 2
 	 * @return the value of the edge between the two vertices
@@ -191,16 +201,26 @@ public abstract class AbstractUndirectedWeightedGraph<V> implements WeightedGrap
 	}
 	
 	/**
+	 * Get the number of vertices in the graph
 	 * @return number of vertices in the graph
 	 */
 	public int getNumbVertices() {
 		return this.currSize;
 	}
 	
+	/**
+	 * Get a specific vertex from the graph
+	 * @param index index of the vertex
+	 * @return the vertex in position index
+	 */
 	public V getVertexFromIndex(int index) {
 		return this.vertices.get(index);
 	}
 	
+	/**
+	 * Get a matrix with the weights between vertices
+	 * @return matrix of weights
+	 */
 	public double [][] getWeightsMatrix(){
 		
 		double[][] copy = new double[currSize][currSize];

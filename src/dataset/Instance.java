@@ -7,7 +7,7 @@ package dataset;
 public interface Instance {
 
 	/**
-	 * Set the value of the class of this instance (>= 0)
+	 * Set the value of the class of this instance (greater or equal to 0)
 	 * @param c class value
 	 * @return true if successful, else false
 	 */
@@ -21,7 +21,7 @@ public interface Instance {
 	int getClassValue();
 
 	/**
-	 * Set a value for an attribute (>= 0)
+	 * Set a value for an attribute (greater or equal to 0)
 	 * @param a Attribute
 	 * @param v Attribute value
 	 * @return true if successful, else false

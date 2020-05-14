@@ -165,6 +165,7 @@ public abstract class AbstractBayesianNetworkClassifier implements Classifier {
 	
 	/**
 	 * Compute number of instances in the train set
+	 * @return number of instances
 	 */
 	protected int computeN() {
 		return trainSet.getNumberOfInstances();

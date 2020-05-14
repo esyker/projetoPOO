@@ -67,23 +67,4 @@ public class TreeNode<V> {
 		return true;
 	}
 
-
-/*
-public static void main (String [] args) {
-		
-	    TreeNode<String> node0 =  new TreeNode<String>("parent");
-	    //node0.addChild("child1");
-	    //node0.addChild("child2");
-	    TreeNode<String> teste =  new TreeNode<String>("teste");
-	    
-	    //teste = node0.children.get(0);
-	    
-	    System.out.println("node" + node0.toString());
-	    //System.out.println("node" + teste.vertex.equals(node0.children.get(1).vertex));
-	    
-    	int i = node0.children.size();
-    	System.out.println("node" + i);
-	       
-	}       
-*/
 }

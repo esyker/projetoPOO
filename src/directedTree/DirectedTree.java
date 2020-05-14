@@ -5,8 +5,8 @@ import java.util.List;
 import graph.*;
 
 /**
- * Interface to Directed Trees
- * An Directed Tree is is a directed graph with a designated node,
+ * Interface to Directed Trees.
+ * A Directed Tree is is a directed graph with a designated node,
  * the root, such that for each node, there is exactly one path from  
  * the root to that node
  */
@@ -40,8 +40,6 @@ public interface DirectedTree<V> {
 	 */
 	V getParent(V child);
 
-	
-	//void removeNode(V vertex);
 
 	/**
 	 * Creates a directed spanning Tree from a SpanningTree

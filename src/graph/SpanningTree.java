@@ -1,6 +1,7 @@
 package graph;
 
-/** Implements a tree data structure
+/** 
+ * Implements a tree data structure.
  */
 public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 
@@ -13,7 +14,8 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 	}
 
 	
-	/** This method connects two vertices and checks if the 
+	/** 
+	 * This method connects two vertices and checks if the 
 	 * connection creates a cycle in the tree, if it is created
 	 * the connection creation is aborted
 	 * @param v1 Vertex 1 to connect
@@ -43,13 +45,15 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 			throw new GraphIsCyclicException();
 	}
     
-    /** This method connects two vertices and checks if the 
+    /** 
+     * This method connects two vertices and checks if the 
 	 * connection creates a cycle in the tree, if it is created
 	 * the connection creation is aborted
 	 * @param v1 Vertex1 to connect
 	 * @param v2 Vertex2 to connect
 	 * @param weight weight of the edge
 	 * @return true if edge was added, false otherwise
+	 * @throws GraphIsCyclicException if a cycle is created in the tree
 	 */
 	@Override
 	public boolean setEdgeWeight(V v1, V v2, double weight) throws GraphIsCyclicException {
@@ -77,7 +81,7 @@ public class SpanningTree<V> extends AbstractUndirectedWeightedGraph<V> {
 	 * Recursive method that finds the maximum height
 	 * that given element generates 
 	 * @param i element to iterate
-	 * @param previus index of the i variable
+	 * @param previous index of the i variable
 	 * @return height of the element
 	 */
     private int findDepth(int i, int previous) {

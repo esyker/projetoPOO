@@ -203,21 +203,6 @@ public class DefaultDirectedTree<V> implements DirectedTree<V> {
 		return to_str;
 	}
 		
-/*
-public static void main (String [] args) {
-		
-		DefaultDirectedTree<String> tree0 =  new DefaultDirectedTree<String>("root");
-	    
-		tree0.addChild("root","child1");
-		tree0.addChild("root","child2");
-		tree0.addChild("child1","child3");
 
-		//TreeNode<String> child1 = tree0.findTreeNode(tree0.root, "child1");
-		
-	    System.out.println("node: " + tree0.getChildren("child1"));
-	    
-	
-	}       
-*/
 }
 

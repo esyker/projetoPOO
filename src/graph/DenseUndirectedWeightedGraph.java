@@ -1,13 +1,14 @@
 package graph;
 
 /**
- * Implements a Dense Weighted graph
+ * Implements a Dense Weighted graph.
  */
 public class DenseUndirectedWeightedGraph<V> extends AbstractUndirectedWeightedGraph<V> {
 	
 	
 	
-	/** Creates a new graph
+	/** 
+	 * Creates a new graph
 	 * @param max_numb_vertices Maximum number of vertices in the graph
 	 */
 	public DenseUndirectedWeightedGraph(int max_numb_vertices) {
@@ -16,7 +17,8 @@ public class DenseUndirectedWeightedGraph<V> extends AbstractUndirectedWeightedG
 	}
 
 	
-	/** This method connects two vertices
+	/** 
+	 * This method connects two vertices with the default weight of 1
 	 * @param v1 Vertex1 to connect
 	 * @param v2 Vertex2 to connect
 	 * @return true if edge was added, false otherwise
@@ -35,7 +37,8 @@ public class DenseUndirectedWeightedGraph<V> extends AbstractUndirectedWeightedG
 		return false;
 	}
 	
-	/** This method connects two vertices
+	/** 
+	 * This method connects two vertices
 	 * @param v1 Vertex1 to connect
 	 * @param v2 Vertex2 to connect
 	 * @param weight weight of the edge
