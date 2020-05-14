@@ -146,10 +146,6 @@ public class ClassifierMetrics {
 	
 	@Override
 	public String toString() {
-		/*
-		DecimalFormat df = new DecimalFormat();
-		df.applyPattern("#.###");
-		df.setRoundingMode(RoundingMode.HALF_UP);*/
 		
 		String output=new String();
 		output=	"Classfier:\n"+classifier+"\n"+
